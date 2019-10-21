@@ -1,0 +1,69 @@
+/* 
+    Created on : 17.11.2017, 06:48:35
+    Author     : Christoph Schulz
+*/
+div.margin_
+{
+margin-top:0cm;
+margin-right:3cm;
+margin-bottom:10.0pt;
+margin-left:3cm;
+}
+ p.PGStandard, li.PGStandard, div.PGStandard
+{
+margin-top:0cm;
+margin-right:0cm;
+margin-bottom:10.0pt;
+margin-left:0cm;
+line-height:135%;
+font-size:12.0pt;
+font-family:"Calibri","sans-serif";
+text-align:justify;
+}
+p.principles
+{
+    margin-left:1cm;
+    margin-right:1cm;
+    line-height:135%;
+}
+h2
+{
+margin-top:0.0pt;
+margin-right:0cm;
+margin-bottom:0cm;
+margin-left:0cm;
+line-height:135%;
+page-break-after:avoid;
+font-size:13.0pt;
+font-family:"Cambria","serif";
+color:#000000;
+}
+h3
+{
+margin-top:0.0pt;
+margin-right:0cm;
+margin-bottom:0cm;
+margin-left:0cm;
+line-height:135%;
+page-break-after:avoid;
+font-size:12.0pt;
+font-family:"Cambria","serif";
+color:#000000;
+}
+a
+{
+text-decoration: none;
+}
+a.threeprinciples{
+text-decoration: underline;
+}
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 2cm;
+    margin-right: 2cm;
+    border-style: inset;
+    border-width: 1px;
+} 
+
