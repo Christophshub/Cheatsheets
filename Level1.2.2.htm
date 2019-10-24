@@ -1,0 +1,182 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="css/map_css.css"> 
+</head>
+<body>
+<div class=margin_>
+&nbsp;
+<h2>Article collection "Cybernetic philosophy"</h2>
+<br>
+<p class=PGStandard><span lang=EN-GB>Level 1.2.2</span></p>
+<h3 align=center style='text-align:center'><span lang=EN-GB>The
+control circuit</span></h3>
+<h3 align='center'>or</h3>
+<h3 align='center'>The cybernetic feedback cycle</h3>
+<br>
+<p class=PGStandard><span lang=EN-GB>
+Every goal-seeking system embodies a feedback cycle, or control circuit. Without one, a goal cannot be reached. 
+It comprises a receptor, which 
+provides information about the system itself and its environment. That information is fed into
+a unit that produces predictions based on the information and on a model of the 
+causal interactions pertaining in the system and its environment. A decision about the best
+action to take is then committed to the effectors, or actuators, of the control unit. That
+action supposedly brings the cybernetic system closer to its goal. Whether that expection turns
+out to be true is assessed in another
+cycle that starts with the gathering of information, which is fed into the modelling unit, etc.
+</span></p>
+<p class=PGStandard><span lang=EN-GB>
+Control circuits come in different variants. Regarding the number of interventions necessary to reach
+the goal, one can classify cycles involving an infinite and a finite number of interventions. An example
+for an infinite number of interventions necessary for reaching the goal is a circuit whose task is regulation, e.g. the
+thermoregulation of animals. Since the ideal temperature sufferns from disturbances
+that overheat or undercool the body constantly, the work of reestablishing the ideal value never ends.
+In contrast, an example for a task with a finite number of interventions is the locomotion with
+one concrete destination. A third class can be defined as one-off interventions. 
+In this class the action is a singleton whose effect can not be corrected or amplified
+by subsequent cycles. But even for those scenarios the processing of feedback can be considered as 
+the default case, with a corresponding impact on tasks of a similar reference class. Another distinction
+concerns the connection between the incoming information and the best intervention to be taken.
+The behaviour of the actuator can be deterministic, e.g. in the form of an expert system. Here the intervention
+is governed by strict if-then-rules. If a is the case, then do b. The general case is, however, a probabilistic
+connection between all variables of the circuit. The measured values of the receptor can map to 
+the objects in the environment probabilistically, the prediction made by the modelling can
+be only probabilistically true, the same holds true for the selection of the best action of the
+actuator, which has to rely on the results of the preceding information stack. Perhaps the most
+significant distinction is between the cases of an adaptive control structure and a non-adaptive one.
+Even non-adaptive control structures have to process feedback from the environment in order to check
+when the goal is finally reached. But more elaborate control structures combine that feedback
+with the information of which intervention has been taken by the effector in the situation of the 
+preceding cycle. In that way the control structure can relate the changes of the environment
+to its own intervention. It can vary its behaviour to see which intervention has the most
+impact in similar situations, and so can gradually improve its intervention policies.
+</span></p>
+<p class=PGStandard style='text-align:justify'><span lang=EN-GB>
+In this article a probabilistic circuit with a single goal shall be considered.
+The significance of statistics resides in several aspects of the
+control circuit. First, the context in which the agent is operating needs to be
+determined based on incoming information. That information can be fuzzy, partial, 
+irrelevant, subject to noise, etc., with the joint effect that the mapping of the
+data to the object that comprise the situational context can only be 
+approximately true. Another constraining factor is the limited complexity of the
+agent, which entails that the information represented in the model of the control unit 
+is always less rich than the information contained in the receptor. The model can 
+only hold types of object rather than complete informational representations of 
+object tokens, because a statistical model must perform in general and not just
+for a particular case that lies within its pertinent scope. The next stage of 
+processing subject to statistical uncertainty concerns the prediction produced 
+by the control unit, i.e. the anticipation of the situation in the next time frame.
+The prediction is supposed to always feed into a decision of some kind. 
+This will either be a recommendation,
+or, if the control structure features an actuator, an intervention.
+If the agent has the ability to intervene, the most beneficial
+option of the whole variety of actions available will be
+chosen. Due to the nature of the informaiton on which that computation rests, the 
+outcome is again subject to a statistical error. The computation
+required for forecasting the possible future states is called a <i>regression</i>.
+Since performing a regression already presupposes a model within which it is
+performed, the question arises how the model is chosen on the basis of which
+the regression is done. This is context-sensitive and depends on the context
+and content of the incoming information and the purpose of the agent. In
+general, what has to be determined prior to the regression is the relevance of
+the types of variables and what content the considered variables have (=context
++ content), which allows the selection of the correct <i>reference class</i> of the
+situation and unlocks the empirical knowledge that the agent can use for the
+regression. Determining the reference context can be called <i>classification</i>
+and is the second major task required for a successful prediction. In practise,
+classification in that sense will often be broken down into classification of
+individual objects involved that comprise the overall situation at stake. In
+that sense the totality of individual classifications constitutes the
+classification of the overall context. </span></p>
+<p class=PGStandard style='text-align:justify'><span lang=EN-GB>Statistics
+therefore appears in the cybernetic control circuit first and foremost in the
+form of classification and regression. That is the reason why these two tasks
+are often featured as the most important tasks of an AI in machine learning
+textbooks and courses. A classification delivers the relevant
+random variables for a prediction or a forecast, which is how the particular
+form of regression is called in this context. The agent’s receptor measures
+certain observable variables (Obs<sub>i</sub>), classifies the objects of the
+relevant reference class (Obj<sub>j</sub>), makes a prediction concerning all
+relevant futures aspects (Pred<sub>k</sub>). When the agent can intervene
+by means of its action variables (Act<sub>l</sub>), it can partially
+determine the situation in the next time frame Pred<sub>k</sub>.  According
+to the assumption of the statistical model, 
+the future situation Pred<sub>k</sub> is relevant to the
+agent and is therefore linked to a payoff value (Pay<sub>m</sub>), which has certain
+significance to the agent. An example for Obs<sub>i</sub>, Obj<sub>j</sub>, Pred<sub>k</sub>
+is the forecast Pred<sub>k</sub> of whether a glass plate will shatter if I
+smash an object Obj<sub>j</sub> into it. Obs<sub>i </sub>are the observable
+features of the object (colour, weight, circumstances of the retrieval of the
+object), on the basis of which I can classify it as, e.g. stone, billard ball,
+gold bar on the one side of the effective outcome, or as a sponge, a paper
+dart, a snowball on the other side. Via the classification knowledge of the
+relevant causal properties of the objects (in the considered case the
+combination of density and solidity) is gained. This information will enables 
+the control unit to calculate the regression that will yield a prediction
+about whether the glass plate will indeed shatter or not. 
+Another example is the evaluation of a
+loan application, where first some observables of an applicant (income, past
+debt service, purpose of the loan) are measured as Obs<sub>i</sub>, the agent
+is subsequently classified into a rating class (Obj<sub>j</sub>), the future
+debt service for the loan in question is predicted (Pred<sub>k</sub>), after
+which the loan will be granted or not (Act<sub>l</sub>), which entails a gain
+(interest) or loss (loan default or opportunity cost) respectively (Pay<sub>m</sub>).
+</span></p>
+
+<p class=PGStandard style='text-align:justify'><span lang=EN-GB>The regression
+that is performed in this context is based on empirical (or statistical)
+knowledge and therefore on the basis of past associations between Obs<sub>i</sub>
+and Pred<sub>k</sub>. Opposed to this is non-empircal knowledge, like what is
+axiomatically given or deduced by means of rules of logic. An important
+dichotomy in statistics is the decision to adopt a classical or a Bayesian
+approach. The classical approach requires the measurement of a sufficient
+number of the associations that serve as the empirical knowledge base, whereas
+Bayesians can start from assigning <i>priors </i>that don’t necessarily have to
+come from explicit measurements within the exact context, but rather make use of
+similar reference classes about which there is knowledge from past interactions.
+This is usually called <i>background knowledge</i>. In both statistical
+approaches the very selection of the observables considered is already
+dependent on prior background knowledge, since it presupposes what are the
+relevant observables for the context, in order to then, by measuring the
+observables, further determine the exact context by means of the aforementioned
+classifications. Pursuing the question what this variable-selection depends on leads
+to a regress that does not stop at a particular point. The determination of
+relevant observables can be automated by using multi-layer neural networks,
+which tend to find relevant observables in a multidimensional input set. 
+But even
+with this approach there is preselection of input to some extent. 
+</span></p>
+
+<p class=PGStandard style='text-align:justify'><span lang=EN-GB>Classical
+regression models, Bayesian networks, and neural networks all have to be
+trained with training data (many concrete examples of the considered type of
+situation) and thereby adapt their internal parameters when exposed to the
+examples. That is why they can be used for adaptive artificial agents like AI
+trained by methods of machine learning. They can then be tested with test data
+or deployed to perform tasks for their principal.
+</span></p>
+
+<p class=PGStandard><span lang=EN-GB>The regression that exploits merely
+associative information (conditional probabilities) between Obs<sub>i</sub> and
+Pred<sub>k </sub>(via Obj<sub>j</sub>) is the simplest form of regression. In
+practise, more often one will attempt to find more elaborate functions that
+connect the different data points Obs<sub>i</sub>, the simplest functions are
+linear functions with parameters to be determined, as in linear regression. The
+outcome of the regression exercise in the linear case is a structural equation
+model, which can be transformed into a Bayesian network under some loss of
+information. Since the models retrieved by means of regression techniques can
+be very different, drilling down into more specific contexts does not
+necessarily preserve an isomorphism between functions that govern different
+levels of models, or between siblings in the same depth-level of drill-down. With
+regression that merely exploits associative information, this can lead to a
+reversal of an effect of causal variables. 
+(see <a href='https://en.wikipedia.org/wiki/Simpson%27s_paradox'
+target='_blank'>Simpson's paradox</a>)</span></p>
+
+<p class=PGStandard><span lang=EN-GB>&nbsp;</span></p>
+
+</div>
+
+</body>
+
+</html>
