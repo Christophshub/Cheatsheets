@@ -22,12 +22,12 @@ C that causes both of them. Represented as a graph, the three cases are thus:</s
 <p align="center"><img src="img/common_cause_principle.png" style="max-width:35%;"/></p>
 <p class=PGStandard style='text-align:justify'><span lang=EN-GB>
 Assuming the perspective of cybernetics, it is the primordial task of an 
-agent to control its environment. To observe a correlation betweeen observables is the first step in order to achieve that goal. Thus, if we look at a system of
+agent to control its environment. Observing a correlation between observables is the first step in order to achieve that goal. Thus, if we look at a system of
 observables and we have direct access to some of the observables, then we can manipulate other parts of the system via our immediate access to
 those directly manipulable variables, given the correlation is of a causal nature and the relation favours such a manipulability. 
 The observational data given by merely observing corelations, however, leaves
 open which of the three possibilities of a binary correlation is real in a concrete case. Concentrating only on the relation between A and B, and leaving aside other ways to determine
-the causal direction betweeen A and B if there is one, then the simplest way to disclose the direction is a direct intervention on both of them and assessing whether 
+the causal direction between A and B if there is one, then the simplest way to disclose the direction is a direct intervention on both of them and assessing whether 
 there is an effect on the correlation. If there is only access to one of them, say A, then manipulating A directly by means of an agent's intervention either
 destroyes the correlation or it maintains it. If the latter is the case, then there is a causal relationship between A and B. If the former is the case,
 then A is an effect of B or A and B are both effects of a third variable C.
@@ -61,9 +61,9 @@ observationally gathered data of the joint probability P(A=a,B=b), or short P(a,
 </p>
 <p class=PGStandard style='text-align:justify'><span lang=EN-GB>
 This is the probability of observing b given one also observes a. In contrast to observational data, interventional data, following Judea Pearl represented as
-P(b| set(a)), will in most causal scenarios be calculated differently, as can be seen in the example of the three variable case below. Alternatively, it can
+P(b| set(a)) or alternatively P(b| do(a)), will in most causal scenarios be calculated differently, as can be seen in the example of the three variable case below. Alternatively, it can
 be directly measured by producing the interventional data by setting A to a designated value a. In the leftmost of the three graphs above, P(b|a) = P(b|do(a)). If a causes
-b and both have no shared causes, it does not matter for P(b) whether I observe A=a or make sure that A=a. In the middle graph, P(b|a) <> P(b|do(a). Given
+b and both have no shared causes, it does not matter for P(b) whether I observe A=a or make sure that A=a. In the middle graph, P(b|a) <> P(b|do(a)). Given
 I observe A=a, the chance of also observing b increases since it is probable that b has in fact caused a. But setting A=a does not increase b's chance
 of occurring, because A has no influence on B. 
 </span></p>
