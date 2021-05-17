@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>data science cheat sheet</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='resources/bootstrap.min.css'>
+    <link rel="stylesheet" href='resources/styles.css'>
+    <script src='resources/html5.js'></script>
+    <script src='resources/respond.min.js'></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <b>
+                        set up issues:
+                    </b>
+                </p>
+                <p>
+                    increase number of rows displayed:<br>
+                    pd.set_option("display.max_rows", 300)
+                </p>
+                <p>
+                    switch off warning messages:<br>
+                    import warnings<br>
+                    warnings.simplefilter(action='ignore')
+                </p>
+                <p>
+                    <b>
+                        Dataframes misc:
+                    </b>
+                </p>
+                <p>
+                    selecting by using .at:<br>
+                    dataframe_.at['2020-03-01','col1']
+                </p>
+                <p>
+                    selecting by using .iat:<br>
+                    dataframe_.iat[3,5]
+                </p>
+                <p>
+                    replace the strings in a column by their lower case variant:<br>
+                    dataframe_['strcol'] = dataframe_['strcol'].str.lower()
+                </p>
+                <p>
+                    add a column to a dataframe showing the lenght of strings of another column:<br>
+                    dataframe_['newlengthcol'] = dataframe_['strcol'].str.len()
+                </p>
+                <p>
+                    change multilevel column name after unstacking:<br>
+                    dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
+                    dataframe_grp = dataframe_grp.unstack(level=0)<br>
+                    dataframe_grp.columns = dataframe_grp.columns.droplevel()<br>
+                </p>
+                <P>
+                    <b>
+                        Numerical analyses:
+                    </b>
+                </P>
+                <p>
+                    calculate means rowwise:<br>
+                    dataframe_.mean(1)<br>
+                    long form:<br>
+                    dataframe_.mean(axis=1)
+                </p>
+                <p>
+                    appy the cumulative sum to all columns of a dataframe:<br>
+                    dataframe_.apply(numpy.cumsum, axis=0)
+                </p>
+                <p>
+                    <b>
+                        Visualisation:
+                    </b>
+                </p>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <td>
+                            <pre>
+# Basic plotting steps for the object oriented method
+import matplotlib.pyplot as plt
+fig = plt.figure()
+axes = fig.add_axes([0.1,0.1,1,1])
+axes.set_xlim([0,15])
+axes.set_ylim([0,7])
+axes.set_xticks([0,2,4,6,8,10,12,14])
+axes.set_yticks([0,1,2,3,4,5])
+axes.grid()
+x = range(1,10)
+y = [1,2,3,4,0.5,4,3,2,1]
+axes.plot(x,y)
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="simpleoo.png" />
+                        </td>
+                    <tr>
+                        <td>
+                            <pre>
+# Example plot of a series from a dataframe, mixing the functional and the object oriented method
+import matplotlib.pyplot as plt
+import pandas as pd
+
+address = 'mycsv.csv'
+dataframe_ = pd.read_csv(address)
+dataframe_.columns = ['attr1','attr2','attr3','attr4','attr5']    
+
+series_ = dataframe_.attr2
+fig = plt.figure()
+ax = fig.add_axes([.1, .3, 0.7, 0.7])
+series_.plot()
+ax.set_xticks(range(32))
+ax.set_xticklabels(dataframe_.attr1, rotation=60, fontsize='medium')
+ax.set_title('My Plot')
+ax.set_xlabel('the names of the cases')
+ax.set_ylabel('the values of the observations')
+ax.set_ylim([0,45])
+ax.set_xlim([0,35])
+plt.show()
+# remark: if other attributes of the dataframe are plotted as well, matplotlib will create two figure-objects,
+# one for the plot and one for the axes-object. In that case, the axes-setup doesn't match with the plot type,
+# and then matplotlib will not be able to relate the two.
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="dflineplot.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# example of plotting a histogram and a scatter plot from a dataframe, using the functional method
+import pandas as pd
+import matplotlib.pyplot as plt
+
+address = 'mycsv.csv'
+dataframe_ = pd.read_csv(address)
+dataframe_.columns = ['attr1','attr2','attr3','attr4','attr5']
+
+attr4 = dataframe_['attr4']
+attr4.plot(kind='hist')
+
+dataframe_.plot(kind='scatter', x='attr2', y='attr4', c=['darkgray'], s=150)
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="dfhistoscatter.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# example plot from seaborn (histogram, scatterplot/regression plot)
+import pandas as pd
+import seaborn as sb
+import matplotlib.pyplot as plt
+
+address = 'mycsv.csv'
+dataframe_ = pd.read_csv(address)
+dataframe_.columns = ['attr1','attr2','attr3','attr4','attr5']  
+attr1 = dataframe_['attr1']
+
+# shows only one plot at a time
+sb.regplot(x='attr2', y='attr4', data=dataframe_, scatter=True)
+#sb.distplot(attr1)
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="dfseabornscatter.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# Example histogram with a bit of design
+
+%matplotlib inline
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+mu, sigma = 100, 15
+data_set = mu + sigma * np.random.randn(10000)
+
+# the histogram of the data
+n, bins, patches = plt.hist(data_set, 50, density=1, facecolor='g', alpha=0.75)
+
+plt.xlabel('Smarts')
+plt.ylabel('Probability')
+plt.title('Histogram of IQ')
+plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+plt.axis([40, 160, 0, 0.03])
+plt.grid(True)
+plt.show()
+# note that all plot objects are set directly on the plt-object
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="histdesignlabels.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# subplots with qt as backend:
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+%matplotlib qt
+my_first_figure = plt.figure("My First Figure")
+subplot_1 = my_first_figure.add_subplot(2, 3, 1)
+subplot_6 = my_first_figure.add_subplot(2, 3, 6)
+plt.plot(np.random.rand(50).cumsum(), 'k--')
+subplot_2 = my_first_figure.add_subplot(2, 3, 2)
+plt.plot(np.random.rand(50), 'go')
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="subplotqtbackend.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# multiple lines in one plot:
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+
+data_set_size = 15
+low_mu, low_sigma = 50, 4.3
+low_data_set = low_mu + low_sigma * np.random.randn(data_set_size)
+high_mu, high_sigma = 57, 5.2
+high_data_set = high_mu + high_sigma * np.random.randn(data_set_size)
+days = list(range(1, data_set_size + 1))
+
+plt.plot(days, low_data_set, days, low_data_set, "vm", days, high_data_set, days, high_data_set, "^k")
+# same plot without the data point markers
+# plt.plot(days, low_data_set, days, high_data_set)
+plt.xlabel('Day')
+plt.ylabel('Temperature: degrees Farenheit')
+plt.title('Randomized temperature data')
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="multiplelines.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# damped oscillation with text annotations:
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+%matplotlib inline
+
+x = np.arange(0, 10, 0.005)
+y = np.exp(-x/2.) * np.sin(2*np.pi*x)
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(x, y)
+ax.set_xlim(0, 10)
+ax.set_ylim(-1, 1)
+
+xdata, ydata = 5, 0
+xdisplay, ydisplay = ax.transData.transform_point((xdata, ydata))
+
+bbox = dict(boxstyle="round", fc="0.8")
+arrowprops = dict(
+    arrowstyle = "->",
+    connectionstyle = "angle,angleA=0,angleB=90,rad=10")
+
+offset = 72
+ax.annotate('data = (%.1f, %.1f)'%(xdata, ydata),
+            (xdata, ydata), xytext=(-2*offset, offset), textcoords='offset points',
+            bbox=bbox, arrowprops=arrowprops)
+
+
+disp = ax.annotate('display = (%.1f, %.1f)'%(xdisplay, ydisplay),
+            (xdisplay, ydisplay), xytext=(0.5*offset, -offset),
+            xycoords='figure pixels',
+            textcoords='offset points',
+            bbox=bbox, arrowprops=arrowprops)
+
+
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="dampedoscillationtextannotation.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# creating a 2 x 2 multiplot via loop:
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
+%matplotlib inline
+
+fig = plt.figure()
+for i, label in enumerate(('A', 'B', 'C', 'D')):
+    ax = fig.add_subplot(2,2,i+1)
+    ax.text(0.05, 0.95, label, transform=ax.transAxes,
+    fontsize=16, fontweight='bold', va='top')
+
+plt.show()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src="subplotsvialoop.png" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# works only in notebooks or other ipython environments
+import pandas as pd
+import matplotlib.pyplot as pp
+
+from IPython import display
+from ipywidgets import interact, widgets
+
+get_ipython().run_line_magic('matplotlib', 'inline')
+gapminder = pd.read_csv('gapminder.csv')
+
+def plotyear(year):
+    data = gapminder[gapminder.year == year]
+    area = 5e-6 * data.population
+    colors = data.region.map({'Africa': 'skyblue', 'Europe': 'gold', 'America': 'palegreen', 'Asia': 'coral'})
+
+    data.plot.scatter('babies_per_woman','age5_surviving',
+                    s=area,c=colors,
+                    linewidths=1,edgecolors='k',
+                    figsize=(12,9))
+
+    pp.axis(ymin=50,ymax=105,xmin=0,xmax=8)
+    pp.xlabel('babies per woman')
+    pp.ylabel('% children alive at 5')
+
+interact(plotyear,year=widgets.IntSlider(min=1950,max=2015,step=1,value=1965))
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='interactivescatter.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+import numpy as np
+import scipy.stats
+import pandas as pd
+
+import matplotlib
+import matplotlib.pyplot as pp
+
+import pandas.plotting
+
+from IPython import display
+from ipywidgets import interact, widgets
+
+%matplotlib inline
+
+gapminder = pd.read_csv('gapminder.csv')
+
+def plotyear(year):
+    data = gapminder[gapminder.year == year].sort_values('population',ascending=False)
+    area = 5e-6 * data.population
+    color = data.age5_surviving
+    edgecolor = data.region.map({'Africa': 'skyblue','Europe': 'gold','America': 'palegreen','Asia': 'coral'})
+    
+    data.plot.scatter('gdp_per_day','life_expectancy',logx=True,
+                        s=area, c=color,
+                        colormap=matplotlib.cm.get_cmap('Purples_r'), vmin=55, vmax=100,
+                        linewidths=1, edgecolors=edgecolor, sharex=False,
+                        figsize=(10,6.5))
+
+    pp.axis(xmin=1,xmax=500,ymin=30,ymax=100)
+
+interact(plotyear,year=range(1965,2016,10))
+    </pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='interactivescatter2.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+    # dataframe_: df with attributes longitude, latitude, population, median_house_value
+    import matplotlib.pyplot as plt
+    dataframe_.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4, s=dataframe_["population"]/100, 
+        label="population", c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True, figsize=(10,7))
+    plt.legend()
+ </pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfscattersizescolorwithscale.png' />
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+import pandas as pd
+import matplotlib.pyplot as pp
+%matplotlib inline
+
+china1965 = pd.read_csv('income-1965-china.csv')        
+china1965.income.plot(kind='box')
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfsimplebox.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+import pandas as pd
+import matplotlib.pyplot as pp
+%matplotlib inline
+
+china1965 = pd.read_csv('income-1965-china.csv')
+usa1965 = pd.read_csv('income-1965-usa.csv')
+pd.DataFrame({'usa': usa1965.log10_income, 'china': china1965.log10_income}).boxplot()
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfmulticolbox.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+import pandas as pd
+
+import matplotlib.pyplot as pp
+%matplotlib inline
+
+china1965 = pd.read_csv('income-1965-china.csv')
+china1965.income.plot(kind='hist',histtype='step',bins=30)
+
+pp.axvline(china1965.income.mean(),c='C1')
+pp.axvline(china1965.income.median(),c='C1',linestyle='--')
+pp.axvline(china1965.income.quantile(0.25),c='C1',linestyle=':')
+pp.axvline(china1965.income.quantile(0.75),c='C1',linestyle=':')
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfdistrbarwithvlines.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+import pandas as pd
+
+import matplotlib.pyplot as pp
+%matplotlib inline
+
+china1965 = pd.read_csv('income-1965-china.csv')
+usa1965 = pd.read_csv('income-1965-usa.csv')
+
+china1965.log10_income.plot.hist(histtype='step',bins=20)
+usa1965.log10_income.plot.hist(histtype='step',bins=20)
+# both calls of the plot-function need to be made from the same cell in notebooks
+# in non-interactive environment pyplot.show() needs to be invoked after both calls
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfdistrcomparebars.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# plot two diagrams in one with different scales, on a dataframe using the functional method of plotting
+import pandas as pd
+import matplotlib.pylab as plt
+
+df = pd.DataFrame({'x': [1.5,2,0.7,3,3.4], 'y': [150, 500, 350, 480,450]})
+ax = df.plot(secondary_y='y')
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dflineplottwoscales.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# plot pairwise correlations between attributes of a dataframe
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sb
+from pylab import rcParams
+
+rcParams['figure.figsize'] = 4, 2
+plt.style.use('seaborn-whitegrid')
+
+address = 'mtcars.csv'
+cars = pd.read_csv(address)
+cars.columns = ['car_names','mpg','cyl','disp', 'hp', 'drat', 'wt', 'qsec', 'vs', 'am', 'gear', 'carb']
+X = cars[['mpg', 'hp', 'qsec','wt']]
+
+sb.pairplot(X)
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfseaborncorrplot.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# add the following line to the code in the cell above
+corr = X.corr()    
+sb.heatmap(corr,xticklabels=corr.columns.values, yticklabels=corr.columns.values)
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dfseabornheatmap.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# Plot two variables moving in time against each other as scatter plot
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as pp
+%matplotlib inline
+gapminder = pd.read_csv('gapminder.csv')
+
+data = gapminder.query('(country == "Italy") or (country == "United States")')
+size = np.where(data.year % 10 == 0,30,2)
+color = np.where(data.country == 'Italy','blue','orange')
+
+data.plot.scatter("gdp_per_day", "life_expectancy",s=size, c=color)
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dftwoscatterplots.png' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <pre>
+# Plot two variables moving in time against each other as scatter plot
+# indicate order of points by line plot
+import numpy as np
+import pandas as pd
+
+import matplotlib.pyplot as pp
+%matplotlib inline
+
+gapminder = pd.read_csv('gapminder.csv')
+data = gapminder.query('(country == "China") or (country == "United States")')
+
+size = np.where(data.year % 10 == 0,30,2)
+color = np.where(data.country == 'China','red','orange')
+
+ax = data.plot.scatter("gdp_per_day", "life_expectancy", logx=True, s=size, c=color)
+
+data[data.country == 'China'].plot.line(x='gdp_per_day',y='life_expectancy',ax=ax)
+</pre>
+                        </td>
+                        <td style="vertical-align:middle">
+                            <img class="img-responsive" src='dftwoscatterplotswithline.png' />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
