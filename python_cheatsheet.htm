@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>python cheat sheet</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='resources/bootstrap.min.css'>
+    <link rel="stylesheet" href='resources/styles.css'>
+    <script src='resources/html5.js'></script>
+    <script src='resources/respond.min.js'></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <b>
+                        BASICS MISC:
+                    </b>
+                </p>
+
+                <p>
+                    get the parts of a string before or after a separating substring:<br>
+                    string_.rpartition('-')[0] # first part of tuple return: part before the separator<br>
+                    string_.rpartition('-')[2] # third part of tuple return: part after the separator<br>
+                </p>
+
+                <p>
+                    check if string starts with substring:<br>
+                    if (string_.startswith(substring_)): ...
+                </p>
+                <p>
+                    create a datetime 5.5 days from now:<br>
+                    now_ = datetime.utcnow()<br>
+                    later_ = now_ + timedelta(days=25, hours=12)
+                </p>
+                <p>
+                    get the difference of two datetimes in days (rounded down):<br>
+                    delta = later_ - earlier_<br>
+                    delta_in_hours = detal.hours
+                </p>
+                <p>
+                    usage of try-catch-else-finally for handling files:<br>
+                <pre>
+import json
+def load_json_key(file, key):
+    handle = open(file, 'r+')
+    try:
+        data = handle.read()
+        result_dict=json.loads(data)
+    except ValueError as e:
+        print("no valid json")
+    else:
+        return result_dict[key] # may raise KeyError to be handled elsewhere
+    finally:
+        handle.close()
+</pre>
+                </p>
+
+                <p>
+                    allow closures to pass changes to variables to outside scope via keyword "nonlocal"
+                <pre>
+def priority_sort(numbers, group):
+    found_one_from_priority_group = False
+    def helper(x):
+        nonlocal found_one_from_priority_group # allow change to occur outside of closure
+        if x in group:
+            found_one_from_priority_group = True # without "nonlocal" this would be interpreted as local declaration + assignment!
+            return(0,x) # sorting of tuples is first element first then the following
+        return(1,x)
+    numbers.sort(key=helper) # pass the closure as argument for sort function
+    return found_one_from_priority_group
+numbers = [8,7,6,5,3,2,1]
+special_group = {2,5,8} # sort these first
+priority_sort(numbers, group)
+</pre>
+                </p>
+
+                <p>
+                    usage of generators instead of functions with return statements, example:
+                <pre>
+def generate_text():
+    yield "first text"
+    yield "second text"
+    yield "third text"
+    for x in range(4,10):
+        yield (str(x) + "th text")
+
+res = generate_text()
+for x in range(1,10):
+     print(next(res))
+</pre>
+                </p>
+
+                <p>
+                    implementing a container class for the iterator protocol for the usage of generators in
+                    methods that iterate data several times (similarly for other kinds of iterators):
+                <pre>
+class ReadData(object):
+    def __init__(self, data_path):
+        self.datapath = data_path
+    def __iter__(self):
+        with open(self.data_path) as f:
+            for line in f:
+                yield int(line)
+def normalize(numbers): 
+    total = sum(numbers)
+    result = []
+    for value in numbers:
+        percent = 100 * value / total
+        result.append(percent)
+    return result
+data = ReadData(filepath)
+percentages = normalize(data)
+</pre>
+                </p>
+
+                <p>
+                    defining a function with keyword-only arguments:
+                <pre>
+def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
+    if kwarg1:
+        ...
+</pre>
+                </p>
+                <p>
+                    <b>
+                        LISTS:
+                    </b>
+                </p>
+
+                <p>
+                    Length of a list:<br>
+                    len(list_)
+                </p>
+
+                <p>
+                    Append element to end of list:<br>
+                    list_.append('new element')
+                </p>
+
+                <p>
+                    Insert as new element at the indexed position:<br>
+                    list_.insert(0,'I am the new first element')
+                </p>
+
+                <p>
+                    Delete by index:<br>
+                    del list_[0]
+                </p>
+
+                <p>
+                    Remove by value:<br>
+                    list_.remove('I am the new first element')
+                </p>
+
+                <p>
+                    concatenate two lists:<br>
+                    list_.extend(list2)
+                </p>
+
+                <p>
+                    sort list by lexicographical order:<br>
+                    list_.sort()
+
+                </p>
+
+                <p>
+                    list of lists:<br>
+                    ll = [[el1,el2,el3],[el5,el6,...],...]<br>
+                </p>
+
+                <p>
+                    addressing a specific element of a list of lists:<br>
+                    ll[ind1][ind2][...]<br>
+                    NOT WORKING WITH: array notation: ll[ind1,ind2,..]<br>
+                </p>
+
+                <p>
+                    slicing in a list:<br>
+                    list_[3:5] # take fourth and fifth element (slice after third and fifth element)<br>
+                    list_[:2] # take first two elements (slice at beginning and after second element)
+                </p>
+
+                <p>
+                    get the first elements from a list of tuples and create from them a new list:<br>
+                    list_ = [i[0] for i in list_of_tuples]
+                </p>
+
+                <p>
+                    <b>
+                        NUMPY ARRAYS:
+                    </b>
+                </p>
+
+                <p>
+                    Create a numerical array and define its datatype:<br>
+                    a = numpy.array([1,2,3,4],dtype=numpy.float64)
+                </p>
+
+                <p>
+                    Print the datatype of array:<br>
+                    print(array_.dtype)
+                </p>
+
+                <p>
+                    Stacking two arrays vertically:<br>
+                    stacked_array = numpy.vstack([array1,array2])<br>
+                    --- if array1,array2 are of shape (5,) this creates a new array of shape (2,5)
+                </p>
+
+                <p>
+                    Transpose an array:<br>
+                    array_.transpose()
+                </p>
+
+                <p>
+                    Save an array to a file:<br>
+                    numpy.save(path_,array_)
+                </p>
+
+                <p>
+                    Load an array from a file:<br>
+                    array_ = numpy.load(path_)
+                </p>
+
+                <p>
+                    Create one-dimensional array with linearly distributed interval values:<br>
+                    array_ = numpy.linspace(firstValue, finalValue, intervalWidth)
+                </p>
+
+                <p>
+                    one-dimensional slicing:<br>
+                    same as with lists
+                </p>
+
+                <p>
+                    slicing from a two-dimensional array:<br>
+                    twodimarray[:,3] # holding fixed second index returns a new one-dim array<br>
+                    twodimarray[:,3:4] # same result but returned as two-dim array
+                </p>
+
+                <p>
+                    using lists for indexing of arrays:<br>
+                    onedimarray[[1,2,5,6,7]]
+                </p>
+
+                <p>
+                    logical indexing: <br>
+                    ndimarray[ndimarray > number]
+                </p>
+
+                <p>
+                    iterate over index and value of an array:<br>
+                    for i, j in enumerate(ar1):<br>
+                    &nbsp;&nbsp;print(i, j)
+                </p>
+                <p>
+                    <b>
+                        DICTIONARIES:
+                    </b>
+                </p>
+
+                <p>
+                    merge two dictionaries (in case of double keys, the second overrides the first):<br>
+                    dict1.update(dict2)
+                </p>
+
+                <p>
+                    Delete by key:<br>
+                    del dict_[key]
+                </p>
+
+                <p>
+                    Looping over keys:<br>
+                    for key in dict_:<br>
+                    &nbsp; &nbsp; print(key)
+                </p>
+
+                <p>
+                    Looping over values:<br>
+                    for value in dict_.values():<br>
+                    &nbsp; &nbsp; print(value)
+                </p>
+
+                <p>
+                    Looping over key and values:<br>
+                    for key,value in dict_.items():<br>
+                    &nbsp; &nbsp; print(key, value)
+                </p>
+
+                <p>
+                    Transpose keys and values via comprehension syntax:<br>
+                    dict_ = {dict_[key]: key for key in dict_}
+                </p>
+
+                <p>
+                    <b>
+                        PANDAS SERIES:
+                    </b>
+                </p>
+
+                <p>
+                    create a series from a list:<br>
+                    series_ = pandas.Series(list_)
+                </p>
+
+                <p>
+                    create a series from a dictionary:<br>
+                    series_ = pandas.Series(dictionary_)
+                </p>
+
+                <p>
+                    create a series with explicitly assigned indexes:<br>
+                    series_ = pandas.Series(list_, index=['entry1','entry2','Poo der Bär','Peter Pan'])
+                </p>
+
+                <p>
+                    slicing from a series:<br>
+                    series_['entry1':'Poo der Bär']<br>
+                    -- unlike with slicing from lists or arrays, the element belonging to the upper end of the slice
+                    will be included
+                </p>
+
+                <p>
+                    using slicing by indexes explicitly:<br>
+                    series_.iloc[0:2]
+                </p>
+
+                <p>
+                    using slicing by values explicitly:<br>
+                    series_.loc[:'Poo der Bär']
+                </p>
+
+                <p>
+                    <b>
+                        PANDAS DATAFRAME:
+                    </b>
+                </p>
+
+                <p>
+                    create a pandas dataframe from two pandas series:<br>
+                    pandas.DataFrame({'col1': series1_, 'col2': series2_})<br>
+                    -- unlike creating a series from a dictionary, the keys will be interpreted as column names, not
+                    keys of observations
+                </p>
+
+                <p>
+                    create a pandas dataframe from two numpy arrays:<br>
+                    pandas.DataFrame({'col1': array1_, 'col2': array2_})<br>
+                </p>
+
+                <p>
+                    create a pandas dataframe from an array of dictionaries:<br>
+                    dataframe_ = pd.DataFrame([{'english':'one','french':'un','german':'eins'},
+                    {'english':'two','french':'deux','german':'zwei'},
+                    {'english':'three','french':'trois','german':'drei'}])<br>
+                    (the keys of the dictionaries are interpreted as column names, the dataframe gets numerical indexes,
+                    a string index can be assigned additionally with the index parameter)
+                </p>
+
+                <p>
+                    create a pandas dataframe from another dataframe by selecting some of its columns:<br>
+                    dataframe_2 = dataframe_[['col1','col2','col3']]
+                </p>
+
+                <p>
+                    create a derived dataframe by selecting the columns by indices:<br>
+                    # drop the first columns and take all other columns into the second df<br>
+                    dataframe_2 = dataframe_[dataframe_.columns[1:]]
+                </p>
+
+                <p>
+                    create a pandas dataframe from another dataframe by filtering:<br>
+                    dataframe_2 = dataframe_[dataframe_['col1'] > 5]
+                </p>
+
+                <p>
+                    Drop rows based on specific observations:<br>
+                    dataframe_= dataframe_[dataframe_.colname != 'value_']
+                </p>
+                <p>
+                    get all rows whose year in a date column is greater than specific year:<br>
+                    df_[df_['date'].dt.year >= 2020]
+                </p>
+                <p>
+                    filter a dataframe by using query-function:<br>
+                    dataframe_seledtion = dataframe_.query('(col1 == "asdf") or (col2 == "qwer")')
+                </p>
+                <p>
+                    filter for entries with column values from a list:<br>
+                    dataframe_[dataframe_['col'].isin(list_)]
+                </p>
+                <p>
+                    add a calculated column directly as an additional column to an existing dataframe:<br>
+                    dataframe_['new_av_col'] = 0.5 * (dataframe_['val1'] + dataframe_['val2'])
+                </p>
+
+                <p>
+                    replace absolute by percentage values in some columns of a dataframe:<br>
+                    cols = ['col1','col2','col3']<br>
+                    dataframe_[cols] = dataframe_[cols].div(dataframe_[cols].sum(axis=1), axis=0).multiply(100)
+                </p>
+                <p>
+                    take last (in a sortable column) element of subgroup (from a groupable column):<br>
+                    df_lastvalues = df_raw.sort_values(by='sortable_attrib').groupby('groupable_attrib').tail(1)
+                </p>
+                <p>
+                    set an existing values column as the new index column of a dataframe:<br>
+                    dataframe_.set_index('colname')
+                </p>
+
+                <p>
+                    Joining two dataframes:<br>
+                    pandas.merge(dataframe1_,dataframe2_,left_on='keycol_df1',right_on='keycol_df2')
+                </p>
+
+                <p>
+                    Concatenate two dataframes:<br>
+                    new_df = pandas.concat((dataframe_1, dataframe_2, dataframe_3))<br>
+                    alterantively:<br>
+                    new_df = pandas.concat([dataframe_1, dataframe_2, dataframe_3])<br>
+                </p>
+
+                <p>
+                    Set a multilevel index for a dataframe:<br>
+                    df_indexed = df.set_index(['colname1', ... , 'colnamen'])
+                </p>
+
+                <p>
+                    get the summary statistics of a dataframe:<br>
+                    dataframe_.describe()
+                </p>
+
+                <p>
+                    grouping in a dataframe by a column and returning the result of an aggregation function on all
+                    numeric columns:<br>
+                    dataframe_.groupby('gender').mean()
+                </p>
+                <p>
+                    equivalent of SQL count(distinct) with group by clause:<br>
+                    dataframe_.groupby(['col1']).col2.nunique()<br>
+                    Remarks:<br>
+                    .sort_values(ascending=False) can be added to chain to quickly assess whether there are multiple
+                    values in col2 belonging to one value in col1<br>
+                    in SQL the above is: select count(distinct(col2)) from table_ group by col1
+                </p>
+                <p>
+                    drop a column from a dataframe (inplace):<br>
+                    dataframe_.drop('colname1', 1, inplace=True)
+                </p>
+
+                <p>
+                    rename one specific column of a dataframe:<br>
+                    dataframe_.rename(columns={"old_name": "new_name"}, inplace=True)
+                </p>
+
+                <p>
+                    drop all rows in a dataframe that have na in a specific column:<br>
+                    dataframe_.dropna(subset=['thecol'], inplace=True)
+                </p>
+                <p>
+                    replace 0's with nan in a column (inplace):<br>
+                    dataframe_['colname1'].replace(0, numpy.nan, inplace=True)
+                </p>
+
+                <p>
+                    replace nan in a column with the median:<br>
+                    median = dataframe_['colname1'].median()<br>
+                    dataframe_['colname1'].fillna(median, inplace=True)<br>
+                    (does the same as: dataframe_['colname1'].replace(numpy.nan, median, inplace=True))
+                </p>
+
+                <p>
+                    Convert every entry in a column of a dataframe to datetime according to a given date format:<br>
+                    from dateteime import datetime<br>
+                    dataframe_['datecol'] = dataframe_['datecol'].apply(lambda x: datetime.strptime(x, "%Y-%m-%d
+                    %H:%M:%S"))
+                </p>
+                <p>
+                    change a value at a specific cell in a dataframe via index:<br>
+                    dataframe_.at['index_value_','col_'] = new_value_
+                </p>
+                <p>
+                    change a value at a specific cell in a dataframe via integer index:<br>
+                    dataframe_.iat[int_,'col_'] = new_value_
+                </p>
+                <p>
+                    replace the occurrence of a string by another in a column:<br>
+                    dataframe_['col1'] = dataframe_['1'].str.replace("\n","<br>")
+                </p>
+                <p>
+                    produce a copy of a dataframe:<br>
+                    dataframe_copy = dataframe_.copy()
+                </p>
+
+                <p>
+                    Create a dataframe for daily numerical observations and set date index and column letters:<br>
+                    dates_index = pd.date_range('20160101', periods=num_periods)<br>
+                    numpy_data = np.array(np.arange(24)).reshape((num_periods, num_attributes))<br>
+                    sample_df = pd.DataFrame(numpy_data, index=dates_index, columns=list('ABCD'))<br>
+                </p>
+
+                <p>
+                    create a date range:<br>
+                    my_index = pandas.date_range('9/1/2020', periods=24, freq='min')
+                </p>
+
+                <p>
+                    perform resampling on a dataframe:<br>
+                    # identify the date column, with respect to which the resampling needs to be done and set it as a
+                    DateTimeIndex:<br>
+                    dataframe_ .set_index(pandas.DateTimeIndex(dataframe_['thedatecol'], inplace=True)<br>
+                    # create another dateframe:<br>
+                    dataframe_rs = pandas.DataFrame()<br>
+                    # define a column that contains the aggregate function and assign the values:<br>
+                    dataframe_rs['col1_agg'] = dataframe_.col1.resample['2W'].sum()
+                </p>
+                create categories based on arbitrarily sized intervals:<br>
+                <pre>
+def func(x):
+    if x < 1e6:
+        return "<1m"
+    elif x < 1e7:
+        return "1-10m"
+    elif x < 5e7:
+        return "10-50m"
+    else:
+        return ">50 m"
+df['Classification'] = df['number'].apply(func)
+</pre>
+                </p>
+                <p>
+                    group (or bin) numerical data based on quantiles, then output the results:<br>
+                <pre>
+bin_labels = ['worst','normal','best']
+results, bin_edges = pandas.qcut(dataframe_['price'],
+            q=3,
+            labels=bin_labels,
+            retbins=True)
+results_table = pandas.DataFrame(zip(bin_edges, bin_labels),
+                            columns=['Threshold', 'Tier'])
+# store the binned data in a column of df:
+df['binned_data'] = results
+</pre>
+                </p>
+                <p>
+                    group (bin) numerical data based on interval width ("class size" in statistics): <br>
+                <pre>
+df['binned_with_cut'] = pd.cut(df['price'], bins=3, lables=bin_labels)
+</pre>
+
+                </p>
+
+                <p>
+                    <b>
+                        SQL-Operations:
+                    </b>
+                </p>
+                <p>
+                    execute a select query and return result as a list of tuples:<br>
+                    def query(sql-string):<br>
+                    cur = db.cursor()<br>
+                    cur.execute(sql-string)<br>
+                    return cur.fetchall()<br>
+                </p>
+                <p>
+                    get connection and query the database version:<br>
+                <pre>
+import psycopg2
+
+conn = psycopg2.connect(
+    host="host_",
+    database="database_",
+    user="user_",
+    password="password_",
+)
+
+try:
+    cur = conn.cursor()
+    print("PostgreSQL database version:")
+    cur.execute("SELECT version()")
+    db_version = cur.fetchone()
+    print(db_version)
+
+    # close the communication with the PostgreSQL
+    cur.close()
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)
+finally:
+    if conn is not None:
+        conn.close()
+        print("Database connection closed.")
+</pre>
+                </p>
+</body>
+
+</html>

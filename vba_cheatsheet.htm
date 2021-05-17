@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VBA cheat sheet</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='resources/bootstrap.min.css'>
+    <link rel="stylesheet" href='resources/styles.css'>
+    <script src='resources/html5.js'></script>
+    <script src='resources/respond.min.js'></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <b>general issues</b>
+                </p>
+                <p>
+                    require variables to be explicitly declared:<br>
+                    Option Explicit (in top row)
+                </p>
+                <p>
+                    <b>
+                        elementary syntax:
+                    </b>
+                </p>
+                <p>
+                    define an array of size n:<br>
+                    Dim array_(n-1) as datatype_
+                </p>
+                <p>
+                    define and initialize via Array-Function:<br>
+                    Dim array_ as Variant<br>
+                    array_ = Array("elem1", "elem2", "elem3")
+                </p>
+                <p>
+                    Redimensionalize an Array:<br>
+                    Dim curarray_() as Currency<br>
+                    ReDim curarray_(size-1) as Currency
+                </p>
+                <p>
+                    Redimensionalize an Array while preserving the values still existing after redimensionalization:<br>
+                    Dim curarray_() as Currency<br>
+                    ReDim curarray_(size-1) as Currency<br>
+                    curarray_(0) = 3<br>
+                    ...<br>
+                    Redim Preserve curarray_(size - 3) as Currency<br>
+                </p>
+                <p>
+                    define a constant:<br>
+                    Const const_ = 123
+                </p>
+                <p>
+                    assign an object to a variables:<br>
+                    Dim object_ as Objecttype_<br>
+                    set object_ = ThisWorkbook.Worksheets
+                </p>
+                <p>
+                    <b>
+                        String functions:
+                    </b>
+                </p>
+                <p>
+                    Substring starting at index (counting from 1) n and with length m:<br>
+                    Mid(str_, n, m)
+                </p>
+                <p>
+                    Substring of first n characters:<br>
+                    Left(str_, n)
+                </p>
+                <p>
+                    Substring of last n characters:<br>
+                    Right(str_, n)
+                </p>
+                <p>
+                    <b>miscellaneous</b>
+                </p>
+                <p>
+                    Print to the immediate console:<br>
+                    Debug.Print a_value
+                </p>
+                <p>
+                    Switch off alerst:<br>
+                    Application.DisplayAlerts = False
+                </p>
+                <p>
+                    Switch off screen updating (like activation of sheets):<br>
+                    Application.ScreenUpdating = False
+                </p>
+                <p>
+                    Use InputBox to select range of cells and print out its sum:<br>
+                    Set rngTargetCells = Application.InputBox(Prompt:="Which cells contain the sale values?",
+                    Type:=8)<br>
+                    sum = Application.WorksheetFunction.Sum(rngTargetCells)<br>
+                    msgbox("The sum is: " & sum)
+                </p>
+                <p>
+                    <b>
+                        Control structures:
+                    </b>
+                </p>
+                <p>
+                    for-loop with step:
+                <pre>
+For initial_ To final_ Step stepsize_
+    some_commands_
+Next
+</pre>
+                </p>
+                <p>
+                    for-each-loop:
+                <pre>
+For Each var_ In collection_
+    some_commands_
+Next
+</pre>
+                </p>
+                <p>
+                    With structure:
+                <pre>
+With Object_
+    .obj_property = val_
+    .obj_property2 = val_
+End With
+</pre>
+                </p>
+                <p>
+                    Do-loop with Exit statement:
+                <pre>
+Do 
+    If condition_ Then Exit Do
+    some_commands_
+Loop
+</pre>
+                </p>
+                <p>
+                    Do-loop with Until clause:
+                <pre>
+Do
+    some_commands_
+Loop Until exit_condition_
+</pre>
+                </p>
+                <p>
+                    Do-loop with While clause:
+                <pre>
+Do
+    some_commands_
+Loop While loop_condition_
+</pre>
+                </p>
+                <p>
+                    If-ElseIf-Else-End if:
+                <pre>
+If ... Then
+...
+ElseIf ... Then
+...
+Else
+...
+End If
+</pre>
+                </p>
+                <p>
+                    Select Case statement:
+                <pre>
+Select Case variable_
+Case Is >= 1000
+    some_commands_
+Case Is >= 100
+    some_commands_
+Calse Else
+    some_commands_
+End Select
+</pre>
+                </p>
+                <p>
+                    <b>
+                        example loop:
+                    </b>
+                </p>
+                <pre>
+Dim i As Integer
+For i = 1 To 6
+    Cells(i, 1).Value = 100
+Next i
+</pre>
+                <p>
+                    <b>
+                        Work environment - Immediate console
+                    </b>
+                </p>
+                <p>
+                    output the current variable in the Immediate console (Direktbereich):<br>
+                    ?the_variable_
+                </p>
+                <p>
+                    concatenate several commands:<br>
+                    command1:command2
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

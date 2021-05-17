@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>cheat sheet miscellaneous</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href='resources/bootstrap.min.css'>
+    <link rel="stylesheet" href='resources/styles.css'>
+    <script src='resources/html5.js'></script>
+    <script src='resources/respond.min.js'></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    Sections:<br>
+                    <a href='#Docker'>Docker</a><br>
+                    <a href='#Kubernetes'>Kubernetes</a><br>
+                    <a href='#Terraform'>Terraform</a><br>
+                    <a href='#Java'>Java</a><br>
+                    <a href='#Javascript'>Javascript</a><br>
+                    <a href='#SQL'>SQL</a><br>
+                    <a href='#Bash and others'>Bash and others</a><br>
+                </p>
+                <a name="Docker"></a>
+                <h1>Docker</h1>
+                <p>
+                    <b>
+                        BASIC DOCKER CLI COMMANDS:
+                    </b>
+                </p>
+                <p>
+                    get the IP address for docker-machine:<br>
+                    docker-machine ip (for Windows, should be run from normal dosbox or power shell that does <i>not</i>
+                    have docker daemon running)
+                </p>
+                <p>
+                    get info about versions, status, state of containers:<br>
+                    docker info
+                </p>
+                <p>
+                    print out client and server versions:<br>
+                    docker version
+                </p>
+                <p>
+                    help about all commands and subcommands available:<br>
+                    docker [subcommand] --help
+                </p>
+                <p>
+                    remove all stopped containers and images:<br>
+                    docker system prune -a
+                </p>
+                <p>
+                    build image from dockerfile residing in current directory, while tagging the image:<br>
+                    docker build -t tag_ .
+                </p>
+                <p>
+                    show images:<br>
+                    docker images OR docker image ls
+                </p>
+                <p>
+                    start container interactively from image and assign name to container:<br>
+                    docker run -it --name containername_ image_
+                </p>
+                <p>
+                    show all running containers:<br>
+                    docker ps OR docker container ls
+                </p>
+                <p>
+                    show all containers including stopped ones:<br>
+                    docker container ls -a
+                </p>
+                <p>
+                    restart stopped container:<br>
+                    docker container start containername_
+                </p>
+                <p>
+                    restart stopped interactively:<br>
+                    docker container start -i containername_
+                </p>
+                <p>
+                    tap into running container in detached mode:<br>
+                    docker attach containername_
+                </p>
+                <p>
+                    remove a (stopped) container:<br>
+                    docker container rm containername_
+                </p>
+                <p>
+                    remove all stopped containers:<br>
+                    docker container rm $(docker container ls -aq)
+                </p>
+                <p>
+                    run a container from an image and overwrite the entrypoint by bash:<br>
+                    docker container run -it --name containername_ image_ bash
+                </p>
+                <p>
+                    enter a container with sh as entrypoint:<br>
+                    docker exec -it containername_ sh
+                </p>
+                <p>
+                    copy a file from the container to the host file system:<br>
+                    docker cp container_:src-path_ local-dest-path_ 
+                </p>
+                <p>
+                    inspect log files of a container:<br>
+                    docker container logs container_ 
+                </p>
+                <p>
+                    attach a volume to a container:<br>
+                    docker container run [other options] -v path_to_local_volume:path_in_container image_
+                </p>
+                <p>
+                    give an additional tag to an existing image:<br>
+                    docker image tag repo_:tag_old repo_:tag_new
+                </p>
+                <p>
+                    <b>
+                        DOCKER COMPOSE CLI COMMANDS:
+                    </b>
+                </p>
+                <p>
+                    start all services registered in docker-compose.yml of working directory in detached mode:<br>
+                    docker-compose up -d
+                </p>
+                <p>
+                    shut down those services:<br>
+                    docker-compose down
+                </p>
+                <p>
+                    print list of services run via docker-compose:<br>
+                    docker-compose ps
+                </p>
+                <p>
+                    grep a string from all logs of docker-compose managed containers:<br>
+                    docker-compose logs | grep "the interesting string ..."
+                </p>
+                <p>
+                    <b>
+                        DOCKER COMPOSE YAML:
+                    </b>
+                </p>
+                <p>
+                    version 2 with two services with port mapping:<br>
+                <pre>
+version: '2'
+services:
+    service1:
+        image: repos_:tag_
+        ports:
+            - 1234:2345
+    service2:
+        image: repos_:tag_
+        ports:
+            - 2345:3456
+</pre>
+                </p>
+                <a name="Kubernetes"></a>
+                <h1>Kubernetes</h1>
+                <p>
+                    <b>
+                        BASIC KUBECTL (and Minikube) COMMANDS:
+                    </b>
+                </p>
+                <p>
+                    get the nodes of the current context:<br>
+                    kubectl get nodes
+                </p>
+                <p>
+                    get all the resources of the current context:<br>
+                    kubectl get all
+                </p>
+                <p>
+                    get the pods of the current context:<br>
+                    kubectl get pods
+                </p>
+                <p>
+                    get all details about a deployments:<br>
+                    kubectl get deployment/deployment_ -o yaml<br>
+                    REMARK: in the same way it works for services
+                </p>
+                <p>
+                    create a new resource from a deployment yaml:<br>
+                    kubectl create -f new_resource_.yaml
+                </p>
+                <p>
+                    delete a deployment:<br>
+                    kubectl delete deployment/deployment_
+                </p>
+                <p>
+                    expose a deployment to make the service consumable:<br>
+                    kubectl expose deployment deployment_ --type=NodePort<br>
+                    REMARK: not needed if a service resource is created for the deployment
+                </p>
+                <p>
+                    get a list of currently hosted services in Minikube cluster:<br>
+                    minikube service list
+                </p>
+                <p>
+                    call a specific service from the list in the browser:<br>
+                    minikube service deployment_
+                </p>
+                <p>
+                    <b>
+                        DIAGNOSTICS:
+                    </b>
+                </p>
+                <p>
+                    get details about (error) state of a pod:<br>
+                    kubectl describe pod/pod_name_
+                </p>
+                <p>
+                    get the logs for a specific pod:<br>
+                    kubectl logs pod_name_
+                </p>
+                <p>
+                    enter a pod with bash as entrypoint:<br>
+                    kubectl exec -it pod_name_ /bin/bash
+                </p>
+                <p>
+                    <b>
+                        KUBERNETES YAML:
+                    </b>
+                </p>
+                <p>
+                    Deployment yaml:
+                </p>
+                <pre>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment_
+spec:
+  selector:
+    matchLabels:
+      app: deployment_app_
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: deployment_app_
+    spec:
+      containers:
+        - name: image_name_
+          image: myself/myrepos_:tag_
+          ports:
+            - containerPort: 123
+</pre>
+                <p>
+                    Service yaml:
+                </p>
+                <pre>
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployment-service_
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: deployment_app_
+</pre>
+                <a name="Terraform"></a>
+                <h1>Terraform</h1>
+                <p>
+                    persist the current plan to a file:<br>
+                    terraform plan -out=tf_plan_.plan<br>
+                    REMARK: .plan files are binary files
+                </p>
+                <p>
+                    show the execution plan of tf_plan_.plan:<br>
+                    terraform show tf_plan_.plan<br>
+                </p>
+                <p>
+                    show all the resources that are under control of terraform:<br>
+                    terraform state list<br>
+                </p>
+                <p>
+                    show the details of an individual resource (from the state list):<br>
+                    terraform state show resource_<br>
+                </p>
+                <p>
+                    preview the changes for destroying resources:<br>
+                    terraform plan -destroy
+                </p>
+                <p>
+                    execute the destruction of resources:<br>
+                    terraform destroy
+                </p>
+                <a name="Java"></a>
+                <a name="Javascript"></a>
+                <a name="SQL"></a>
+                <h1>SQL</h1>
+                <p>
+                    get the number of distinct days (from datetime column) for which there are entries in a table
+                    (postgres):<br>
+                    SELECT DISTINCT substring("datetime_column_" ,1,10) FROM "table_name_" tn <br>
+                    (assuming that date is according to yyyy-mm-dd scheme)
+                </p>
+                <p>
+                    get the number of unique values of a column (postgres):<br>
+                    SELECT count(distinct "column_name_") FROM "table_name_" alias_;
+                </p>
+                <p>
+                    get list of fields (columns) of a data base:<br>
+                    SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME = 'table_name_' ORDER BY
+                    ORDINAL_POSITION
+                </p>
+                <p>
+                    filter for a specific month (postgres):<br>
+                    select * from "table_name_" alias_ where extract(month from month_column_) = 12
+                </p>
+                <a name="Bash and others"></a>
+                <h1>Bash and others</h1>
+                <p>
+                    write the statistics of running containers into a log file:<br>
+                    while true; do docker stats --no-stream | tee --append stats.txt; sleep 1; done
+                </p>
+                <p>
+                    file transfer (whole folder) via ssh-connection:<br>
+                    Pscp -r local_Path account_name@domain:remote_path<br>
+                    (windows: use quotes when whitespaces on path)>
+                </p>
+                <p>
+                    find out the external IP address:<br>
+                    wget -qO- https://ipecho.net/plain ; echo
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
