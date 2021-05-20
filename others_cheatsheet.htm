@@ -157,6 +157,18 @@ services:
             - 2345:3456
 </pre>
                 </p>
+                <p>
+                    <b>
+                        special use-cases for docker-compose<br>
+                    </b>
+                </p>
+                <p>
+                    set up environment for docker-based unit testing:<br>
+                    docker-compose build<br>
+                    docker-compose run test sh<br>
+                    in container run: pytest<br>
+                    or: pytest -k keyword_
+                </p>
                 <a name="Kubernetes"></a>
                 <h1>Kubernetes</h1>
                 <p>
