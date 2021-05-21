@@ -118,9 +118,9 @@
                 </p>
                 <p>
                     create a docker network:<br>
-		    docker network create network_
-		</p>
-		<p>
+                    docker network create network_
+                </p>
+                <p>
                     <b>
                         DOCKER COMPOSE CLI COMMANDS:
                     </b>
@@ -167,11 +167,23 @@ services:
                     </b>
                 </p>
                 <p>
-                    set up environment for docker-based unit testing:<br>
+                    <i>set up environment for docker-based unit testing and run tests:</i><br>
                     docker-compose build<br>
                     docker-compose run test sh<br>
                     in container run: pytest<br>
                     or: pytest -k keyword_
+                </p>
+                <p>
+                    <i>set up environment for airflow and run tests:</i><br>
+                    docker-compose up --build -d<br>
+                    via attached shell in VSCode execute: pytest<br>
+                    alternatively: <br>
+                    docker exec -it container_ sh<br>
+                    then execute: pytest<br>
+                    stop the containers with:<br>
+                    docker-compose stop<br>
+                    restart them:<br>
+                    docker-compose start
                 </p>
                 <a name="Kubernetes"></a>
                 <h1>Kubernetes</h1>
