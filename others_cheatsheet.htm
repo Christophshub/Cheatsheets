@@ -101,6 +101,10 @@
                     docker exec -it containername_ sh
                 </p>
                 <p>
+                    enter a container as root user:<br>
+                    docker exec -u 0 -it containername_ sh
+                </p>
+                <p>
                     copy a file from the container to the host file system:<br>
                     docker cp container_:src-path_ local-dest-path_ 
                 </p>
@@ -358,11 +362,11 @@ spec:
                     find out the external IP address:<br>
                     wget -qO- https://ipecho.net/plain ; echo
                 </p>
-		<p>
-		    search a git repository for a keyword:<br>
-		    git grep "keyword_" `git show-ref --heads`
-		</p>
-	    </div>
+                <p>
+                    search a git repository for a keyword:<br>
+                    git grep "keyword_" `git show-ref --heads`
+                </p>
+            </div>
         </div>
     </div>
 </body>

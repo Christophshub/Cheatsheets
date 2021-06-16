@@ -41,6 +41,12 @@
                     delta_in_hours = detal.hours
                 </p>
                 <p>
+                    format the current datetime as a sortable string:<br>
+                    from datetime import datetime<br>
+                    now_ = datetime.now()
+                    now_formatted = datetime.strftime(now_, '%Y%m%d-%H%M%S')
+                </p>
+                <p>
                     usage of try-catch-else-finally for handling files:<br>
                 <pre>
 import json
@@ -593,10 +599,10 @@ finally:
         conn.close()
         print("Database connection closed.")
 </pre>
-<p>
-<b>pytest</b>
-</p>
-		</p>
+                <p>
+                    <b>pytest</b>
+                </p>
+                </p>
 </body>
 
 </html>
