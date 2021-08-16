@@ -359,6 +359,10 @@ spec:
                     (windows: use quotes when whitespaces on path)>
                 </p>
                 <p>
+                    transfer a from EC2 instance to local folder:<br>
+                    scp -i ec2key.pem username@ec2ip:/remote/path/to/file /local/path/to/file
+                </p>
+                <p>
                     find out the external IP address:<br>
                     wget -qO- https://ipecho.net/plain ; echo
                 </p>
