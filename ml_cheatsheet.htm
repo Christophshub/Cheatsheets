@@ -75,7 +75,7 @@ dataframe_.hist(bins=binning_size, figsize=20,15))
                     </b>
                 </p>
                 <pre>
-create stratum category:
+create stratum category, with cut-off value:
 divisor = value_at_cut_off_point / number_of_categories
 dataframe_["stratum_cat"] = np.ceil(dataframe_["important_predictor_cont"]/divisor)
 dataframe_["stratum_cat"].where(dataframe_["stratum_cat"] < number_of_categories, number_of_categories, inplace=True)
