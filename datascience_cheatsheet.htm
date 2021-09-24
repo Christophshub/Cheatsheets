@@ -217,6 +217,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
+# the following line is not required outside of jupyter notebooks
+# for notebooks, PyQt5 needs to be installed (does not have to be imported explicitly)
 %matplotlib qt
 my_first_figure = plt.figure("My First Figure")
 subplot_1 = my_first_figure.add_subplot(2, 3, 1)

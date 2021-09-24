@@ -359,12 +359,23 @@ spec:
                     (windows: use quotes when whitespaces on path)>
                 </p>
                 <p>
+                    transfer a from EC2 instance to local folder:<br>
+                    scp -i ec2key.pem username@ec2ip:/remote/path/to/file /local/path/to/file
+                </p>
+                <p>
                     find out the external IP address:<br>
                     wget -qO- https://ipecho.net/plain ; echo
                 </p>
                 <p>
                     search a git repository for a keyword:<br>
                     git grep "keyword_" `git show-ref --heads`
+                </p>
+                <p>
+                    <b>aws cli</b>
+                </p>
+                <p>
+                    output all files in a directory in a S3 bucket ordered by date:<br>
+                    aws s3api list-objects --bucket bucket_ --prefix folder_ --query "sort_by(Contents,&LastModified)" --profile profile_name_ > file.txt
                 </p>
             </div>
         </div>

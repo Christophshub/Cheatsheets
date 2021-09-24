@@ -517,11 +517,11 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     perform resampling on a dataframe:<br>
                     # identify the date column, with respect to which the resampling needs to be done and set it as a
                     DateTimeIndex:<br>
-                    dataframe_ .set_index(pandas.DateTimeIndex(dataframe_['thedatecol'], inplace=True)<br>
+                    dataframe_ .set_index(pandas.DatetimeIndex(dataframe_['thedatecol']), inplace=True)<br>
                     # create another dateframe:<br>
                     dataframe_rs = pandas.DataFrame()<br>
                     # define a column that contains the aggregate function and assign the values:<br>
-                    dataframe_rs['col1_agg'] = dataframe_.col1.resample['2W'].sum()
+                    dataframe_rs['col1_agg'] = dataframe_.col1.resample('2W').sum()
                 </p>
                 create categories based on arbitrarily sized intervals:<br>
                 <pre>
@@ -599,12 +599,6 @@ finally:
         conn.close()
         print("Database connection closed.")
 </pre>
-                <p>
-                    <b>pytest</b>
-                </p>
-                <p>
-                    adsf
-                </p>
 </body>
 
 </html>
