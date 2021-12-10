@@ -21,30 +21,30 @@
                 </p>
                 <p>
                     increase number of rows displayed:<br>
-		    pd.set_option("display.max_rows", 300)<br>
-		    or:<br>
-		    pd.set_option("max_rows", 300)
+                    pd.set_option("display.max_rows", 300)<br>
+                    or:<br>
+                    pd.set_option("max_rows", 300)
                 </p>
-		<p>
-		    display float number as decimal:<br>
-		    pd.options.display.float_format = '{:,.2f}'.format
+                <p>
+                    display float number as decimal:<br>
+                    pd.options.display.float_format = '{:,.2f}'.format
                 <p>
                     switch off warning messages:<br>
                     import warnings<br>
                     warnings.simplefilter(action='ignore')
                 </p>
                 <p>
-		    <b>
-			Juypter Notebooks:
-	            </b>
-		</p>
-		<p>
-		    hyperlinks with a notebook:<br>
-		    [by clicking this jump to The Section](#link_id)<br>
-		    ... <br>
-		    &lt;a id='link_id'&gt;&lt;/a&gt;<br>
-		    **Header of The Section**
-		</p>
+                    <b>
+                        Juypter Notebooks:
+                    </b>
+                </p>
+                <p>
+                    hyperlinks with a notebook:<br>
+                    [by clicking this jump to The Section](#link_id)<br>
+                    ... <br>
+                    &lt;a id='link_id'&gt;&lt;/a&gt;<br>
+                    **Header of The Section**
+                </p>
                 <p>
                     <b>
                         Dataframes misc:
@@ -86,6 +86,27 @@
                 <p>
                     appy the cumulative sum to all columns of a dataframe:<br>
                     dataframe_.apply(numpy.cumsum, axis=0)
+                </p>
+                <p>
+                    <b>
+                        Data prepration:
+                    </b>
+                </p>
+                <p>
+                    create dummy birthdays based on information about age:<br>
+                <pre>
+from datetime import datetime, timedelta
+import random
+df['birthdate'] = datetime(year_,month_,date_) - df.Age.map(timedelta)*365.2425
+df['birthdate'] = df['birthdate'].apply(lambda x: x - timedelta(365*random.random())).dt.date
+# check against given age:
+from dateutil.relativedelta import relativedelta
+from datetime import date
+def diff_in_years(x,y): 
+    return relativedelta(x,y).years
+df['date'] = date(year_,month_,day_)
+df['age_check'] = df.apply(lambda x: diff_in_year(x['date'],x['birthdate']), axis= 1)
+</pre>
                 </p>
                 <p>
                     <b>
