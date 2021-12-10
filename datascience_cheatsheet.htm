@@ -84,6 +84,12 @@
                     dataframe_.mean(axis=1)
                 </p>
                 <p>
+                    calculate cumulative sums down the column for numerical columns:<br>
+                    dataframe_[['num-col-1','num-col-2', ...]].cumsum()<br>
+                    Beware: the last row does not necessarily show the sum of all summable entries,
+                    it will show NaN instead if the entry itself in the row is NaN
+                </p>
+                <p>
                     appy the cumulative sum to all columns of a dataframe:<br>
                     dataframe_.apply(numpy.cumsum, axis=0)
                 </p>

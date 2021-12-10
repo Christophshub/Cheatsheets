@@ -348,6 +348,10 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     series_ = series_.str.replace(";",",")
                 </p>
                 <p>
+                    convert a string to float column when numbers are in German format:<br>
+                    df['col'] = df['col'].str.replace('.', '').str.replace(',','.').astype(float)
+                </p>
+                <p>
                     remove leading and trailing spaces:<br>
                     series_ = series_.str.strip()
                 </p>
