@@ -433,6 +433,16 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_[dataframe_['col'].isin(list_)]
                 </p>
                 <p>
+                    for categoricals: filter by means of groupby:<br>
+                    grouping = df_.groupby('col1')<br>
+                    df_selection = grouping.get_group('one of the cats')
+                </p>
+                <p>
+                    filter out whole groups based on the statistic returned by an aggregation function<br>
+                    grouping = df_.groupby('col1')<br>
+                    df_filtered = grouping.filter(lambda x: x['num_col'].max() &lt; threshold_value)
+                </p>
+                <p>
                     add a calculated column directly as an additional column to an existing dataframe:<br>
                     dataframe_['new_av_col'] = 0.5 * (dataframe_['val1'] + dataframe_['val2'])
                 </p>
@@ -474,7 +484,8 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 </p>
 
                 <p>
-                    grouping in a dataframe by a column and returning the result of an aggregation function on all
+                    grouping in a dataframe by a column and returning the result of an aggregation function on
+                    all
                     numeric columns:<br>
                     dataframe_.groupby('gender').mean()
                 </p>
@@ -482,7 +493,8 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     equivalent of SQL count(distinct) with group by clause:<br>
                     dataframe_.groupby(['col1']).col2.nunique()<br>
                     Remarks:<br>
-                    .sort_values(ascending=False) can be added to chain to quickly assess whether there are multiple
+                    .sort_values(ascending=False) can be added to chain to quickly assess whether there are
+                    multiple
                     values in col2 belonging to one value in col1<br>
                     in SQL the above is: select count(distinct(col2)) from table_ group by col1
                 </p>
@@ -513,7 +525,8 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 </p>
 
                 <p>
-                    Convert every entry in a column of a dataframe to datetime according to a given date format:<br>
+                    Convert every entry in a column of a dataframe to datetime according to a given date
+                    format:<br>
                     from dateteime import datetime<br>
                     dataframe_['datecol'] = dataframe_['datecol'].apply(lambda x: datetime.strptime(x, "%Y-%m-%d
                     %H:%M:%S"))
@@ -536,7 +549,8 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 </p>
 
                 <p>
-                    Create a dataframe for daily numerical observations and set date index and column letters:<br>
+                    Create a dataframe for daily numerical observations and set date index and column
+                    letters:<br>
                     dates_index = pd.date_range('20160101', periods=num_periods)<br>
                     numpy_data = np.array(np.arange(24)).reshape((num_periods, num_attributes))<br>
                     sample_df = pd.DataFrame(numpy_data, index=dates_index, columns=list('ABCD'))<br>
@@ -549,7 +563,8 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
 
                 <p>
                     perform resampling on a dataframe:<br>
-                    # identify the date column, with respect to which the resampling needs to be done and set it as a
+                    # identify the date column, with respect to which the resampling needs to be done and set it
+                    as a
                     DateTimeIndex:<br>
                     dataframe_ .set_index(pandas.DatetimeIndex(dataframe_['thedatecol']), inplace=True)<br>
                     # create another dateframe:<br>
@@ -562,9 +577,9 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
 def func(x):
     if x < 1e6:
         return "<1m"
-    elif x < 1e7:
+    elif x	< 1e7:
         return "1-10m"
-    elif x < 5e7:
+    elif x 	< 5e7:
         return "10-50m"
     else:
         return ">50 m"
