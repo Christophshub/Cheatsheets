@@ -120,6 +120,10 @@ df['age_check'] = df.apply(lambda x: diff_in_year(x['date'],x['birthdate']), axi
                     assuming labels is a list of string values representing the names of the categories, and that the
                     list entry order corresponds to the ordinality of the ordinal type
                 </p>
+		<p>
+                    read in a csv and assign datat types:<br>
+		    df = pd.read_csv(path_, dtype={'int-col': int})
+		</p>
                 <p>
                     <b>
                         Visualisation:
