@@ -115,6 +115,12 @@ df['age_check'] = df.apply(lambda x: diff_in_year(x['date'],x['birthdate']), axi
 </pre>
                 </p>
                 <p>
+                    turning string data representing categorical information into an ordinal data type:<br>
+                    df['cat-col'] = pd.Categorical(df['cat-col'], ordered=True, categories=lables)<br>
+                    assuming labels is a list of string values representing the names of the categories, and that the
+                    list entry order corresponds to the ordinality of the ordinal type
+                </p>
+                <p>
                     <b>
                         Visualisation:
                     </b>
