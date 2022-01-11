@@ -371,11 +371,19 @@ spec:
                     git grep "keyword_" `git show-ref --heads`
                 </p>
                 <p>
+                    purge a file from the git commit history:<br>
+                    (unprotect the corresponding branch if necessary)<br>
+                    git filter-branch --force --index-filter "git rm --cached --ignore-unmatch SUPER_SENSITIVE_FILE"
+                    --prune-empty --tag-name-filter cat -- --all<br>
+                    git push --force
+                </p>
+                <p>
                     <b>aws cli</b>
                 </p>
                 <p>
                     output all files in a directory in a S3 bucket ordered by date:<br>
-                    aws s3api list-objects --bucket bucket_ --prefix folder_ --query "sort_by(Contents,&LastModified)" --profile profile_name_ > file.txt
+                    aws s3api list-objects --bucket bucket_ --prefix folder_ --query "sort_by(Contents,&LastModified)"
+                    --profile profile_name_ > file.txt
                 </p>
             </div>
         </div>
