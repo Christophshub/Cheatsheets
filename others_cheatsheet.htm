@@ -367,6 +367,9 @@ spec:
                     wget -qO- https://ipecho.net/plain ; echo
                 </p>
                 <p>
+                    <b>git</b>
+                </p>
+                <p>
                     search a git repository for a keyword:<br>
                     git grep "keyword_" `git show-ref --heads`
                 </p>
@@ -376,6 +379,14 @@ spec:
                     git filter-branch --force --index-filter "git rm --cached --ignore-unmatch SUPER_SENSITIVE_FILE"
                     --prune-empty --tag-name-filter cat -- --all<br>
                     git push --force
+                </p>
+                <p>
+                    git log with some options:<br>
+                    git log -n 5 # last 5 commits to current branch<br>
+                    git log --since=2020-01-01<br>
+                    git log --until=2020-01-01<br>
+                    git log --author=Michael<br>
+                    git log --grep keyword_
                 </p>
                 <p>
                     <b>aws cli</b>
