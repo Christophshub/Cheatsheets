@@ -44,11 +44,14 @@
                 </p>
                 <p>
                     Redimensionalize an Array while preserving the values still existing after redimensionalization:<br>
-                    Dim curarray_() as Currency<br>
-                    ReDim curarray_(size-1) as Currency<br>
+                    Dim curarray_(size-1) as Currency<br>
                     curarray_(0) = 3<br>
                     ...<br>
-                    Redim Preserve curarray_(size - 3) as Currency<br>
+                    Redim Preserve curarray_(size - 2) as Currency<br>
+                </p>
+                <p>
+                    Lower and upper index bound of an array:<br>
+                    LBound(array_), UBound(array_)
                 </p>
                 <p>
                     define a constant:<br>
@@ -58,6 +61,13 @@
                     assign an object to a variable:<br>
                     Dim object_ as Objecttype_<br>
                     set object_ = ThisWorkbook.Worksheets
+                </p>
+                <p>
+                    define a function:<br>
+                    Function func_(int_ as Integer, str_ as String) as My_other_datatype<br>
+                    ...<br>
+                    func_ = some_other_func(int_, str_, some_const)<br>
+                    End Function
                 </p>
                 <p>
                     <b>
@@ -75,6 +85,16 @@
                 <p>
                     Substring of last n characters:<br>
                     Right(str_, n)
+                </p>
+                <p>
+                    Search for a substring in another string:<br>
+                    If (InStr("the string containing the substring", "the substring")) > 0 then ...<br>
+                    Remark: the return-value is the position where the substring starts (counting from 1), otherwise it is 0
+                </p>
+                <p>
+                    Split a string according to a separator:<br>
+                    arr_str = Split("to:be:splitted",":")<br>
+                    (first index of arr_str will be 0)
                 </p>
                 <p>
                     <b>miscellaneous</b>
@@ -97,6 +117,10 @@
                     Type:=8)<br>
                     sum = Application.WorksheetFunction.Sum(rngTargetCells)<br>
                     msgbox("The sum is: " & sum)
+                </p>
+                <p>
+                    Return the ASCII Code of a character:<br>
+                    Asc("a")
                 </p>
                 <p>
                     <b>
@@ -136,6 +160,7 @@ Do
     some_commands_
 Loop
 </pre>
+                <i>There is an analogous statement for for-loops (If condition_ Then Exit For)</i>
                 </p>
                 <p>
                     Do-loop with Until clause:
@@ -191,6 +216,18 @@ Next i
 </pre>
                 <p>
                     <b>
+                        Data types:
+                    </b>
+                </p>
+                <p>
+                    check if variable or content of a cell has a numerical value:<br>
+                    IsNumeric(var_) <br>
+                    or:<br>
+                    IsNumeric(Cell(i,j))<br>
+                    Remark: IsNumeric works for a single cell referenced by Range(), but not for multiple cells, for which it always returns False.
+                </p>
+                <p>
+                    <b>
                         Work environment - Immediate console
                     </b>
                 </p>
@@ -201,6 +238,30 @@ Next i
                 <p>
                     concatenate several commands:<br>
                     command1:command2
+                </p>
+                <p>
+                    <b>EXCEL</b>
+                </p>
+                <p>
+                    assign a worksheet to an object variable from another worksheet of the same workbook:<br>
+                    set sheet_ = ThisWorkbook.Sheets("name_")<br>
+                    Remark: from a module that belongs to the same workbooks, sheets can be directly accessed by: Sheets("name_")
+                </p>
+                <p>
+                    create a new tab / Worksheet to an existing Workbook:<br>
+                    Dim newsheet<br>
+                    Set newsheet = Sheets.Add(After:=Sheets(Worksheets.Count), Count:=1, Type:=xlWorksheet)<br>
+                    newsheet.Name = "my new sheet"<br>
+                    Remark: Code works both when run from a module or from a Sheet
+                </p>
+                <p>
+                    put a formula on a cell - example 1: take the sum of a range of values from another sheets:<br>
+                    lastlineofvalues = 15<br>
+                    Range("B2").Formula = "=Sum(OtherSheet_!A3:A" & lastlineofvalues & ")"<br>
+                </p>
+                <p>
+                    put a formula on a cell - example 2: assign to a cell the trimmed value of the cell to its left via the trim function, using the R1C1-schema:<br>
+                    Range("B1").FormulaR1C1 = "=Trim(RC[-1])"
                 </p>
             </div>
         </div>
