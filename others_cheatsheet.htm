@@ -339,13 +339,17 @@ spec:
                     SELECT count(distinct "column_name_") FROM "table_name_" alias_;
                 </p>
                 <p>
+                    filter for a specific month (postgres):<br>
+                    select * from "table_name_" alias_ where extract(month from date_column_) = 12
+                </p>
+                <p>
                     get list of fields (columns) of a data base:<br>
                     SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME = 'table_name_' ORDER BY
                     ORDINAL_POSITION
                 </p>
                 <p>
-                    filter for a specific month (postgres):<br>
-                    select * from "table_name_" alias_ where extract(month from date_column_) = 12
+                    get the definition of a view as SQL (postgres):<br>
+                    select pg_get_viewdef('schema_.view_', true)
                 </p>
                 <a name="Bash and others"></a>
                 <h1>Bash and others</h1>
