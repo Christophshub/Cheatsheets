@@ -37,6 +37,10 @@
                     dbt docs generate
                 </p>
                 <p>
+                    install the dependencies in packages.yml:<br>
+                    dbt deps
+                </p>
+                <p>
                     <b>
                         Templating:
                     </b>
@@ -181,6 +185,20 @@ The status can be one of the following values:
 | rejected      | order was rejected  |
 
 {% enddocs %}
+</pre>
+                <p>
+                    the packages.yml file: <br>
+                </p>
+<pre>
+packages:
+  # this package is installed via hub.getdbt.com
+  - package: dbt-labs/dbt_utils
+    version: 0.8.6
+  # this way it is installed via github directly (current main)
+  - git: https://github.com/dbt-labs/dbt-utils
+    revision: main
+  # or via a local copy; in the local folder there must be a dbt_project.yml
+  - local: local_folder_within_dbt_project
 </pre>
                 <b>
                     General issues:
