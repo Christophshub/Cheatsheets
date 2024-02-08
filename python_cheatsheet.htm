@@ -393,7 +393,11 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                         PANDAS DATAFRAME:
                     </b>
                 </p>
-
+                <p>
+                    <b>
+                        Creation:<br>
+                    </b>
+                </p>
                 <p>
                     create a pandas dataframe from two pandas series:<br>
                     pandas.DataFrame({'col1': series1_, 'col2': series2_})<br>
@@ -414,7 +418,20 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     (the keys of the dictionaries are interpreted as column names, the dataframe gets numerical indexes,
                     a string index can be assigned additionally with the index parameter)
                 </p>
-
+                <p>
+                    <b>
+                        Descriptive statistics:<br>
+                    </b>
+                </p>
+                <p>
+                    get the summary statistics of a dataframe:<br>
+                    dataframe_.describe()
+                </p>
+                <p>
+                    <b>
+                        Filtering and selecting:<br>
+                    </b>
+                </p>
                 <p>
                     create a pandas dataframe from another dataframe by selecting some of its columns:<br>
                     dataframe_2 = dataframe_[['col1','col2','col3']]
@@ -430,7 +447,6 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     create a pandas dataframe from another dataframe by filtering:<br>
                     dataframe_2 = dataframe_[dataframe_['col1'] > 5]
                 </p>
-
                 <p>
                     Drop rows based on specific observations:<br>
                     dataframe_= dataframe_[dataframe_.colname != 'value_']
@@ -452,97 +468,50 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_[dataframe_['col'].isin(list_)]
                 </p>
                 <p>
-                    for categoricals: filter by means of groupby:<br>
-                    grouping = df_.groupby('col1')<br>
-                    df_selection = grouping.get_group('one of the cats')
+                    drop a column from a dataframe (inplace):<br>
+                    dataframe_.drop('colname1', 1, inplace=True)
                 </p>
                 <p>
-                    filter out whole groups based on the statistic returned by an aggregation function<br>
-                    grouping = df_.groupby('col1')<br>
-                    df_filtered = grouping.filter(lambda x: x['num_col'].max() &lt; threshold_value)
+                    drop all rows in a dataframe that have na in a specific column:<br>
+                    dataframe_.dropna(subset=['thecol'], inplace=True)
+                </p>
+                <p>
+                    <b>
+                        Index operations:<br>
+                    </b>
+                </p>                
+                <p>
+                    set an existing values column as the new index column of a dataframe:<br>
+                    dataframe_.set_index('colname')
+                </p>
+                <p>
+                    Set a multilevel index for a dataframe:<br>
+                    df_indexed = df.set_index(['colname1', ... , 'colnamen'])
+                </p>
+                <p>
+                    <b>
+                        Extend and manipulate data:<br>
+                    </b>
                 </p>
                 <p>
                     add a calculated column directly as an additional column to an existing dataframe:<br>
                     dataframe_['new_av_col'] = 0.5 * (dataframe_['val1'] + dataframe_['val2'])
                 </p>
-
                 <p>
                     replace absolute by percentage values in some columns of a dataframe:<br>
                     cols = ['col1','col2','col3']<br>
                     dataframe_[cols] = dataframe_[cols].div(dataframe_[cols].sum(axis=1), axis=0).multiply(100)
                 </p>
                 <p>
-                    take last (in a sortable column) element of subgroup (from a groupable column):<br>
-                    df_lastvalues = df_raw.sort_values(by='sortable_attrib').groupby('groupable_attrib').tail(1)
-                </p>
-                <p>
-                    set an existing values column as the new index column of a dataframe:<br>
-                    dataframe_.set_index('colname')
-                </p>
-
-                <p>
-                    Joining two dataframes:<br>
-                    pandas.merge(dataframe1_,dataframe2_,left_on='keycol_df1',right_on='keycol_df2')
-                </p>
-
-                <p>
-                    Concatenate two dataframes:<br>
-                    new_df = pandas.concat((dataframe_1, dataframe_2, dataframe_3))<br>
-                    alterantively:<br>
-                    new_df = pandas.concat([dataframe_1, dataframe_2, dataframe_3])<br>
-                </p>
-
-                <p>
-                    Set a multilevel index for a dataframe:<br>
-                    df_indexed = df.set_index(['colname1', ... , 'colnamen'])
-                </p>
-
-                <p>
-                    get the summary statistics of a dataframe:<br>
-                    dataframe_.describe()
-                </p>
-
-                <p>
-                    grouping in a dataframe by a column and returning the result of an aggregation function on
-                    all
-                    numeric columns:<br>
-                    dataframe_.groupby('gender').mean()
-                </p>
-                <p>
-                    equivalent of SQL count(distinct) with group by clause:<br>
-                    dataframe_.groupby(['col1']).col2.nunique()<br>
-                    Remarks:<br>
-                    .sort_values(ascending=False) can be added to chain to quickly assess whether there are
-                    multiple
-                    values in col2 belonging to one value in col1<br>
-                    in SQL the above is: select count(distinct(col2)) from table_ group by col1
-                </p>
-                <p>
-                    drop a column from a dataframe (inplace):<br>
-                    dataframe_.drop('colname1', 1, inplace=True)
-                </p>
-
-                <p>
-                    rename one specific column of a dataframe:<br>
-                    dataframe_.rename(columns={"old_name": "new_name"}, inplace=True)
-                </p>
-
-                <p>
-                    drop all rows in a dataframe that have na in a specific column:<br>
-                    dataframe_.dropna(subset=['thecol'], inplace=True)
-                </p>
-                <p>
                     replace 0's with nan in a column (inplace):<br>
                     dataframe_['colname1'].replace(0, numpy.nan, inplace=True)
                 </p>
-
                 <p>
                     replace nan in a column with the median:<br>
                     median = dataframe_['colname1'].median()<br>
                     dataframe_['colname1'].fillna(median, inplace=True)<br>
                     (does the same as: dataframe_['colname1'].replace(numpy.nan, median, inplace=True))
                 </p>
-
                 <p>
                     Convert every entry in a column of a dataframe to datetime according to a given date
                     format:<br>
@@ -563,10 +532,72 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_['col1'] = dataframe_['col1'].str.replace("\n","\r\n")
                 </p>
                 <p>
+                    <b>
+                        Grouping:<br>
+                    </b>
+                </p>
+                <p>
+                    grouping in a dataframe by a column and returning the result of an aggregation function on
+                    all
+                    numeric columns:<br>
+                    dataframe_.groupby('gender').mean()
+                </p>
+                <p>
+                    take last (in a sortable column) element of subgroup (from a groupable column):<br>
+                    df_lastvalues = df_raw.sort_values(by='sortable_attrib').groupby('groupable_attrib').tail(1)
+                </p>
+                <p>
+                    equivalent of SQL count(distinct) with group by clause:<br>
+                    dataframe_.groupby(['col1']).col2.nunique()<br>
+                    Remarks:<br>
+                    .sort_values(ascending=False) can be added to chain to quickly assess whether there are
+                    multiple
+                    values in col2 belonging to one value in col1<br>
+                    in SQL the above is: select count(distinct(col2)) from table_ group by col1
+                </p>
+                <p>
+                    for categoricals: filter by means of groupby:<br>
+                    grouping = df_.groupby('col1')<br>
+                    df_selection = grouping.get_group('one of the cats')
+                </p>
+                <p>
+                    filter out whole groups based on the statistic returned by an aggregation function<br>
+                    grouping = df_.groupby('col1')<br>
+                    df_filtered = grouping.filter(lambda x: x['num_col'].max() &lt; threshold_value)
+                </p>
+                <p>
+                    <b>
+                        Reshape:<br>
+                    </b>
+                </p>
+                <p>
+                    rename one specific column of a dataframe:<br>
+                    dataframe_.rename(columns={"old_name": "new_name"}, inplace=True)
+                </p>
+                <p>
+                    <b>
+                        Merge and concatenate:<br>
+                    </b>
+                </p>
+                <p>
+                    Joining two dataframes:<br>
+                    pandas.merge(dataframe1_,dataframe2_,left_on='keycol_df1',right_on='keycol_df2')
+                </p>
+                <p>
+                    Concatenate two dataframes:<br>
+                    new_df = pandas.concat((dataframe_1, dataframe_2, dataframe_3))<br>
+                    alterantively:<br>
+                    new_df = pandas.concat([dataframe_1, dataframe_2, dataframe_3])<br>
+                </p>
+                <p>
+                    <b>
+                        Miscellaneous:<br>
+                    </b>
+                </p>
+                <p>
                     produce a copy of a dataframe:<br>
                     dataframe_copy = dataframe_.copy()
                 </p>
-
                 <p>
                     Create a dataframe for daily numerical observations and set date index and column
                     letters:<br>
@@ -574,12 +605,10 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     numpy_data = np.array(np.arange(24)).reshape((num_periods, num_attributes))<br>
                     sample_df = pd.DataFrame(numpy_data, index=dates_index, columns=list('ABCD'))<br>
                 </p>
-
                 <p>
                     create a date range:<br>
                     my_index = pandas.date_range('9/1/2020', periods=24, freq='min')
                 </p>
-
                 <p>
                     perform resampling on a dataframe:<br>
                     # identify the date column, with respect to which the resampling needs to be done and set it
