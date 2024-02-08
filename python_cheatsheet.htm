@@ -468,6 +468,10 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_[dataframe_['col'].isin(list_)]
                 </p>
                 <p>
+                    select rows by means of a list (also works with .loc):<br>
+                    dataframe_.iloc[[2,3,6]]
+                </p>                
+                <p>
                     drop a column from a dataframe (inplace):<br>
                     dataframe_.drop('colname1', 1, inplace=True)
                 </p>
@@ -487,6 +491,14 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 <p>
                     Set a multilevel index for a dataframe:<br>
                     df_indexed = df.set_index(['colname1', ... , 'colnamen'])
+                </p>
+                <p>
+                    Reset to the numerical index:<br>
+                    df.reset_index(inplace=True)
+                </p>
+                <p>
+                    Sort by the index:<br>
+                    df.sort_index(inplace=True)
                 </p>
                 <p>
                     <b>
@@ -551,8 +563,7 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_.groupby(['col1']).col2.nunique()<br>
                     Remarks:<br>
                     .sort_values(ascending=False) can be added to chain to quickly assess whether there are
-                    multiple
-                    values in col2 belonging to one value in col1<br>
+                    multiple values in col2 belonging to one value in col1<br>
                     in SQL the above is: select count(distinct(col2)) from table_ group by col1
                 </p>
                 <p>
