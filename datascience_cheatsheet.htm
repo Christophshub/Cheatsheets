@@ -21,10 +21,14 @@
                 </p>
                 <p>
                     increase number of rows displayed:<br>
+                    pd.set_option("max_columns", 30)
+                </p>
+                <p>
+                    set number of columns displayed:<br>
                     pd.set_option("display.max_rows", 300)<br>
                     or:<br>
                     pd.set_option("max_rows", 300)
-                </p>
+                </p>                
                 <p>
                     display float number as decimal:<br>
                     pd.options.display.float_format = '{:,.2f}'.format
