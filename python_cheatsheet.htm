@@ -578,6 +578,21 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 </p>
                 <p>
                     <b>
+                        Data types:<br>
+                    </b>
+                </p>
+                <p>
+                    cast a string with a date into date:<br>
+                    dataframe_ = pandas.DataFrame(['12.10.2019'])<br>
+                    df_temp[0] = pandas.to_datetime(df_temp[0], format="%d.%m.%Y")
+                </p>
+                <p>
+                    cast a string with a date into date (example with two-digit year):<br>
+                    dataframe_ = pandas.DataFrame(['12.10.19'])<br>
+                    df_temp[0] = pandas.to_datetime(df_temp[0], format="%d.%m.%y")
+                </p>
+                <p>
+                    <b>
                         Reshape:<br>
                     </b>
                 </p>
