@@ -335,7 +335,23 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     create a series with explicitly assigned indexes:<br>
                     series_ = pandas.Series(list_, index=['entry1','entry2','Poo der Bär','Peter Pan'])
                 </p>
-
+                <p>
+                    create a series with explicitly assigned indexes:<br>
+                    series_ = pandas.period_range('12/1/2024',freq='30d',periods=6)<br>
+                    or equivalently:<br>
+                    series_ = pandas.period_range('2024-12-01',freq='30d',periods=6)<br>
+                    <i>output will be:</i>PeriodIndex(['2023-12-01', '2023-12-31', '2024-01-30', '2024-02-29',
+                    '2024-03-30', '2024-04-29'], dtype='period[30D]')
+                </p>
+                <p>
+                    create a series with year-months:<br>
+                    series_ = pandas.period_range('2024-12-08',freq='1m',periods=3)<br>
+                    <i>output will be:</i>PeriodIndex(['2024-12', '2025-01', '2025-02'], dtype='period[M]')
+                </p>
+                <p> 
+                    create a series with dates with month-intervalls, preserving the given day:<br>
+                    series_ = pandas.period_range('2023-12-03',freq='1m',periods=6).to_timestamp() + timedelta(days=2) 
+                </p>
                 <p>
                     slicing from a series:<br>
                     series_['entry1':'Poo der Bär']<br>
