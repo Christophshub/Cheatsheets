@@ -14,33 +14,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <p>
-                    <b>
-                        set up issues:
-                    </b>
-                </p>
-                <p>
-                    increase number of rows displayed:<br>
-                    pd.set_option("max_columns", 30)
-                </p>
-                <p>
-                    set number of columns displayed:<br>
-                    pd.set_option("display.max_rows", 300)<br>
-                    or:<br>
-                    pd.set_option("max_rows", 300)
-                </p>                
-                <p>
-                    display float number as decimal:<br>
-                    pd.options.display.float_format = '{:,.2f}'.format
-                <p>
-                    switch off warning messages:<br>
-                    import warnings<br>
-                    warnings.simplefilter(action='ignore')
-                </p>
-                <p>
                     <b>
                         Juypter Notebooks:
                     </b>
+                </p>
+                </p>             
+                    switch off warning messages:<br>
+                    import warnings<br>
+                    warnings.simplefilter(action='ignore')
                 </p>
                 <p>
                     hyperlinks with a notebook:<br>
@@ -48,33 +29,6 @@
                     ... <br>
                     &lt;a id='link_id'&gt;&lt;/a&gt;<br>
                     **Header of The Section**
-                </p>
-                <p>
-                    <b>
-                        Dataframes misc:
-                    </b>
-                </p>
-                <p>
-                    selecting by using .at:<br>
-                    dataframe_.at['2020-03-01','col1']
-                </p>
-                <p>
-                    selecting by using .iat:<br>
-                    dataframe_.iat[3,5]
-                </p>
-                <p>
-                    replace the strings in a column by their lower case variant:<br>
-                    dataframe_['strcol'] = dataframe_['strcol'].str.lower()
-                </p>
-                <p>
-                    add a column to a dataframe showing the lenght of strings of another column:<br>
-                    dataframe_['newlengthcol'] = dataframe_['strcol'].str.len()
-                </p>
-                <p>
-                    change multilevel column name after unstacking:<br>
-                    dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
-                    dataframe_grp = dataframe_grp.unstack(level=0)<br>
-                    dataframe_grp.columns = dataframe_grp.columns.droplevel()<br>
                 </p>
                 <P>
                     <b>
@@ -99,7 +53,16 @@
                 </p>
                 <p>
                     <b>
-                        Data prepration:
+                        Data Screening:
+                    </b>
+                </p>
+                <p>
+                    check if in all columns of a dataframe the first and the last entry are the same:<br>
+                    check = df.apply(lambda x: 'same' if x.loc[0] == x.loc[len(x)-1] else 'different', axis=0)
+                </p>
+                <p>
+                    <b>
+                        Data preparation:
                     </b>
                 </p>
                 <p>

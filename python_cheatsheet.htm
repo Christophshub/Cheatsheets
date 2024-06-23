@@ -340,13 +340,13 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     series_ = pandas.period_range('12/1/2024',freq='30d',periods=6)<br>
                     or equivalently:<br>
                     series_ = pandas.period_range('2024-12-01',freq='30d',periods=6)<br>
-                    <i>output will be:</i>PeriodIndex(['2023-12-01', '2023-12-31', '2024-01-30', '2024-02-29',
+                    <i>output will be: </i>PeriodIndex(['2023-12-01', '2023-12-31', '2024-01-30', '2024-02-29',
                     '2024-03-30', '2024-04-29'], dtype='period[30D]')
                 </p>
                 <p>
                     create a series with year-months:<br>
                     series_ = pandas.period_range('2024-12-08',freq='1m',periods=3)<br>
-                    <i>output will be:</i>PeriodIndex(['2024-12', '2025-01', '2025-02'], dtype='period[M]')
+                    <i>output will be: </i>PeriodIndex(['2024-12', '2025-01', '2025-02'], dtype='period[M]')
                 </p>
                 <p> 
                     create a series with dates with month-intervalls, preserving the given day:<br>
@@ -391,6 +391,10 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     series_ = series_.str.lower()<br>
                 </p>
                 <p>
+                    add a column to a dataframe showing the length of strings of another column:<br>
+                    dataframe_['newlengthcol'] = dataframe_['strcol'].str.len()
+                </p>
+                <p>
                     <b>
                         Series and the dt accessor:<br>
                     </b>
@@ -409,6 +413,21 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                         PANDAS DATAFRAME:
                     </b>
                 </p>
+                <p>
+                    <b>
+                        Options:<br>
+                    </b>
+                </p>
+                <p>
+                    set number of rows/columns displayed:<br>
+                    pd.set_option("display.max_rows", 300)<br>
+                    cols:<br>
+                    pd.set_option("display.max_columns", 300)
+                </p>   
+                <p>
+                    display float number as decimal:<br>
+                    pd.options.display.float_format = '{:,.2f}'.format
+                <p>                
                 <p>
                     <b>
                         Creation:<br>
@@ -486,6 +505,14 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 <p>
                     select rows by means of a list (also works with .loc):<br>
                     dataframe_.iloc[[2,3,6]]
+                </p>
+                <p>
+                    selecting by using .at:<br>
+                    dataframe_.at['2020-03-01','col1']
+                </p>
+                <p>
+                    selecting by using .iat:<br>
+                    dataframe_.iat[3,5]
                 </p>                
                 <p>
                     drop a column from a dataframe (inplace):<br>
@@ -591,6 +618,12 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     filter out whole groups based on the statistic returned by an aggregation function<br>
                     grouping = df_.groupby('col1')<br>
                     df_filtered = grouping.filter(lambda x: x['num_col'].max() &lt; threshold_value)
+                </p>
+                <p>
+                    change multilevel column name after unstacking:<br>
+                    dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
+                    dataframe_grp = dataframe_grp.unstack(level=0)<br>
+                    dataframe_grp.columns = dataframe_grp.columns.droplevel()<br>
                 </p>
                 <p>
                     <b>
