@@ -575,6 +575,23 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     %H:%M:%S"))
                 </p>
                 <p>
+                    apply a dictionary-based map to a column:<br>
+                    dict_ = {'one': "eins", 'two':"zwei", 'three':"drei"}<br>
+                    dataframe_['german_designators'] = dataframe_['number_designators'].map(dict_)
+                </p>
+                <p>
+                    apply a function-based map to a column:<br>
+                    dataframe_['sqrt'] = dataframe_['numbers'].map(np.sqrt)
+                </p>
+                <p>
+                    apply a function to all cells of a dataframe (what was formerly applymap):<br>
+                    df.map(np.sqrt)<br>
+                    <i>the following three other expressions are equivalent to it:</i><br>
+                    df.map(lambda x: np.sqrt(x))<br>
+                    df.apply(np.sqrt)<br>
+                    df.apply(lambda x: np.sqrt(x))<br>
+                </p>
+                <p>
                     change a value at a specific cell in a dataframe via index:<br>
                     dataframe_.at['index_value_','col_'] = new_value_
                 </p>
