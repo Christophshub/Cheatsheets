@@ -365,7 +365,7 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                 </p>
 
                 <p>
-                    using slicing by values explicitly:<br>
+                    using slicing by custom index values explicitly:<br>
                     series_.loc[:'Poo der Bär']
                 </p>
                 <p>
@@ -637,7 +637,19 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     df_filtered = grouping.filter(lambda x: x['num_col'].max() &lt; threshold_value)
                 </p>
                 <p>
-                    change multilevel column name after unstacking:<br>
+                    <b>
+                        Stacking and Multilevel-Indexing:<br>
+                    </b>
+                </p>
+                <p>
+                    <b>
+                        create multilevel column index by grouping of multiple columns and aggregating:<br>
+                        dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
+                        datframe_grp.index # will show a multilevel index with levels col1 and col2<br>
+                    </b>
+                </p>
+                <p>
+                    remove multilevel column name after unstacking:<br>
                     dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
                     dataframe_grp = dataframe_grp.unstack(level=0)<br>
                     dataframe_grp.columns = dataframe_grp.columns.droplevel()<br>
