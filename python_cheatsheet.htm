@@ -369,6 +369,12 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     series_.loc[:'Poo der Bär']
                 </p>
                 <p>
+                    creating a boolean mask for a series and using it for filtering:<br>
+                    # series_ has the custom index values from 'one' to 'nine'<br>
+                    mask = ~series_.index.isin(['four','nine'])<br>
+                    series_3[mask]
+                </p>
+                <p>
                     <b>
                         Series and the str accessor:<br>
                     </b>
