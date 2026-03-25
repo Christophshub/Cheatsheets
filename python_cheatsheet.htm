@@ -505,6 +505,11 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     dataframe_selection = dataframe_.query('(col1 == "asdf") or (col2 == "qwer")')
                 </p>
                 <p>
+                    usage of pandas.where():<br>
+                    df.where(df.numbers % 3 == 0, "condition not met")
+                    (note that this is not a static method like in numpy)
+                </p>
+                <p>
                     filter for entries with column values from a list:<br>
                     dataframe_[dataframe_['col'].isin(list_)]
                 </p>
@@ -598,6 +603,18 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     df.apply(lambda x: np.sqrt(x))<br>
                 </p>
                 <p>
+                    use the numpy.select function to create a new column based on multiple conditions:<br>
+                    conditions = [<br>
+                    &nbsp;&nbsp;transactions["month"] == 12,<br>
+                    &nbsp;&nbsp;(transactions["month"] == 5) & (transactions["day_of_week"] == 6),<br>
+                    &nbsp;&nbsp;(transactions["month"] == 7) & (transactions["day_of_week"] == 0)<br>
+                    ]<br>
+                    # specify outcomes for each condition<br>
+                    choices = ["Holiday Bonus", "Corporate Month", "Summer Special"]<br>
+                    # Call the select method, passing in conditions, choices, and a default value of 'None' if no condition met<br>
+                    transactions["seasonal_bonus"] = np.select(conditions, choices, default="None")<br>
+                </p>
+                <p>
                     change a value at a specific cell in a dataframe via index:<br>
                     dataframe_.at['index_value_','col_'] = new_value_
                 </p>
@@ -648,11 +665,9 @@ def function_(arg1,arg2, *, kwarg1=123, kwarg2='default_value'):
                     </b>
                 </p>
                 <p>
-                    <b>
                         create multilevel column index by grouping of multiple columns and aggregating:<br>
                         dataframe_grp = dataframe_.groupby(['col1','col2']).count()<br>
                         datframe_grp.index # will show a multilevel index with levels col1 and col2<br>
-                    </b>
                 </p>
                 <p>
                     remove multilevel column name after unstacking:<br>
